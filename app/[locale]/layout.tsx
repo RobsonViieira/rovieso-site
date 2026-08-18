@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import { getMessages, unstable_setRequestLocale } from "next-intl/server";
 import { Space_Grotesk, Inter } from "next/font/google";
 import { locales } from "@/i18n/config";
 import Analytics from "@/components/Analytics";
@@ -43,6 +43,7 @@ export default async function LocaleLayout({
   children: ReactNode;
   params: { locale: string };
 }) {
+  unstable_setRequestLocale(locale);
   const messages = await getMessages();
 
   return (
