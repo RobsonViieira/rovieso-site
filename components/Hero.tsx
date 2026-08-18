@@ -1,10 +1,33 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 
+const COMMANDS = [
+  "$ git push origin main",
+  "✓ deploy iniciado...",
+  "$ pm2 restart api",
+  "✓ ARIA online",
+  "✓ sistema pronto.",
+];
+
 export default function Hero() {
   const t = useTranslations("hero");
+  const [lines, setLines] = useState<string[]>([]);
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < COMMANDS.length) {
+        setLines((prev) => [...prev, COMMANDS[i]]);
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 500);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section className="relative overflow-hidden bg-circuit-fade px-6 pb-20 pt-28 sm:pt-36">
@@ -35,6 +58,18 @@ export default function Hero() {
         >
           {t("subtitle")}
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mx-auto mt-8 max-w-md rounded-xl border border-white/10 bg-black/40 p-4 text-left font-mono text-xs text-cyan-soft sm:text-sm"
+        >
+          {lines.map((line, i) => (
+            <div key={i}>{line}</div>
+          ))}
+          <span className="animate-pulse">▍</span>
+        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
