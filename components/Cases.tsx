@@ -1,18 +1,28 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useTranslations } from "next-intl";
+
+const LAYERS = [
+  { key: "layerProblem", color: "bg-red-500/20 border-red-400/30" },
+  { key: "layerBackend", color: "bg-cyan/10 border-cyan/30" },
+  { key: "layerAI", color: "bg-indigo/20 border-indigo-400/30" },
+  { key: "layerDashboard", color: "bg-cyan/25 border-cyan/50" },
+];
 
 export default function Cases() {
   const t = useTranslations("cases");
-  const tags = [
-    t("slrTag1"),
-    t("slrTag2"),
-    t("slrTag3"),
-    t("slrTag4"),
-  ];
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const tags = [t("slrTag1"), t("slrTag2"), t("slrTag3"), t("slrTag4")];
 
   return (
-    <section id="cases" className="px-6 py-24">
+    <section id="cases" ref={ref} className="px-6 py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 max-w-lg">
           <h2 className="font-display text-2xl font-medium text-mist sm:text-3xl">
@@ -42,21 +52,28 @@ export default function Cases() {
               </div>
             </div>
 
-            {/* Mockup abstrato de dashboard, sem depender de imagem externa */}
-            <div className="rounded-xl border border-white/10 bg-navy-deep/60 p-5">
-              <div className="flex items-end gap-2 h-24">
-                {[40, 65, 50, 85, 60].map((h, i) => (
-                  <div
-                    key={i}
-                    style={{ height: `${h}%` }}
-                    className="flex-1 rounded-t bg-cyan/60"
-                  />
-                ))}
-              </div>
-              <div className="mt-4 space-y-2">
-                <div className="h-2 w-3/4 rounded bg-white/10" />
-                <div className="h-2 w-1/2 rounded bg-white/10" />
-              </div>
+            {/* Camadas do sistema revelando-se conforme rola */}
+            <div className="relative flex h-64 flex-col justify-center gap-2">
+              {LAYERS.map((layer, i) => {
+                const start = i / LAYERS.length;
+                const end = start + 1 / LAYERS.length;
+                const opacity = useTransform(
+                  scrollYProgress,
+                  [start, end],
+                  [0, 1]
+                );
+                const x = useTransform(scrollYProgress, [start, end], [-30, 0]);
+
+                return (
+                  <motion.div
+                    key={layer.key}
+                    style={{ opacity, x }}
+                    className={`rounded-lg border px-4 py-3 text-xs text-white/70 ${layer.color}`}
+                  >
+                    {t(layer.key)}
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </div>

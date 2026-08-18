@@ -51,7 +51,11 @@
     "slrTag1": "FastAPI",
     "slrTag2": "React",
     "slrTag3": "AWS",
-    "slrTag4": "IA integrada"
+    "slrTag4": "IA integrada",
+    "layerProblem": "Planilha manual, dados dispersos",
+    "layerBackend": "Backend FastAPI estruturando tudo",
+    "layerAI": "IA (ARIA) interpretando e sugerindo",
+    "layerDashboard": "Dashboard em tempo real, decisão rápida"
   },
   "about": {
     "title": "Quem constrói isso",
@@ -70,9 +74,9 @@
     "error": "Algo deu errado. Tenta de novo ou chama no WhatsApp."
   },
   "chat": {
-    "bubble": "Fale com a Rovieso",
+    "bubble": "Teste o ARIA →",
     "placeholder": "Digite sua dúvida...",
-    "greeting": "Olá! Posso ajudar a entender qual serviço faz sentido pro seu caso. O que você precisa resolver?"
+    "greeting": "Eu sou o ARIA, a IA que a Rovieso constrói pros seus clientes. Pergunta qualquer coisa sobre automação, dados ou IA — essa conversa acontece com o mesmo motor que já roda em produção."
   },
   "footer": {
     "tagline": "Automação, IA e sistemas sob medida.",

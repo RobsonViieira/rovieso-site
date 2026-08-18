@@ -8,39 +8,24 @@
   "hero": {
     "eyebrow": "Automação · IA · Sistemas à medida",
     "title": "A sua empresa ainda perde tempo com trabalho que devia funcionar sozinho.",
-    "subtitle": "Construímos automações, chatbots com IA e sistemas à medida que resolvem processos manuais reais — sem complicação técnica do seu lado.",
+    "subtitle": "Construímos automações, chatbots com IA e sistemas à medida que resolvem processos manuais a sério — sem complicação técnica do seu lado.",
     "cta": "Falar sobre o meu projeto",
     "ctaSecondary": "Ver o que fazemos"
   },
   "chaos": {
     "title": "Isto transforma-se nisto.",
-    "before": "Dados dispersos. Processo manual. Tempo perdido.",
+    "before": "Dados espalhados. Processo manual. Tempo perdido.",
     "after": "Estrutura clara. Automação. Controlo real."
   },
   "services": {
     "title": "O que fazemos",
     "subtitle": "Cinco formas de tirar a sua operação do modo manual.",
     "items": [
-      {
-        "name": "Automação",
-        "description": "Tarefa repetitiva que consome horas todos os dias, a funcionar sozinha."
-      },
-      {
-        "name": "Chatbot com IA",
-        "description": "Atendimento inteligente 24 horas, sem perder qualidade."
-      },
-      {
-        "name": "Dados & Pipelines",
-        "description": "Folha de cálculo desorganizada a transformar-se em informação fiável."
-      },
-      {
-        "name": "Sistema à medida",
-        "description": "Processo específico do seu negócio, com ferramenta própria."
-      },
-      {
-        "name": "Deploy em nuvem",
-        "description": "Infraestrutura profissional, sem dor de cabeça técnica."
-      }
+      { "name": "Automação", "description": "Tarefa repetitiva que consome horas todos os dias, a funcionar sozinha." },
+      { "name": "Chatbot com IA", "description": "Atendimento inteligente 24 horas, sem perder qualidade." },
+      { "name": "Dados & Pipelines", "description": "Folha de cálculo desorganizada a tornar-se informação fiável." },
+      { "name": "Sistema à medida", "description": "Processo específico do seu negócio, com ferramenta própria." },
+      { "name": "Deploy na nuvem", "description": "Infraestrutura profissional, sem dor de cabeça técnica." }
     ]
   },
   "cases": {
@@ -51,28 +36,32 @@
     "slrTag1": "FastAPI",
     "slrTag2": "React",
     "slrTag3": "AWS",
-    "slrTag4": "IA integrada"
+    "slrTag4": "IA integrada",
+    "layerProblem": "Folha de cálculo manual, dados dispersos",
+    "layerBackend": "Backend FastAPI a estruturar tudo",
+    "layerAI": "IA (ARIA) a interpretar e sugerir",
+    "layerDashboard": "Dashboard em tempo real, decisão rápida"
   },
   "about": {
     "title": "Quem constrói isto",
-    "body": "Antes de programar, eu geria operações. Anos de experiência prática em processos industriais e logísticos ensinaram-me onde um processo realmente falha — muito antes de escrever a primeira linha de código. Hoje uso essa experiência para construir sistemas que resolvem o problema real, não apenas o que parece bem no ecrã.",
+    "body": "Antes de programar, eu operava. Anos de experiência prática em processos industriais e logísticos ensinaram-me onde um processo realmente trava — muito antes de escrever a primeira linha de código. Hoje uso essa vivência para construir sistemas que resolvem o problema a sério, não só o que parece bonito no ecrã.",
     "signature": "Fundador da Rovieso"
   },
   "contact": {
     "title": "Vamos falar sobre o seu problema",
-    "subtitle": "Diga-nos o que está a travar a sua operação — respondemos pessoalmente.",
+    "subtitle": "Conte o que está a travar a sua operação — respondo pessoalmente.",
     "name": "O seu nome",
     "email": "O seu e-mail",
-    "message": "Conte-nos o que precisa",
+    "message": "Conte o que precisa",
     "submit": "Enviar mensagem",
     "or": "ou fale diretamente pelo WhatsApp",
-    "success": "Mensagem enviada. Entraremos em contacto em breve.",
-    "error": "Algo correu mal. Tente novamente ou contacte-nos via WhatsApp."
+    "success": "Mensagem enviada. Resposta em breve.",
+    "error": "Algo correu mal. Tente novamente ou contacte pelo WhatsApp."
   },
   "chat": {
-    "bubble": "Fale com a Rovieso",
-    "placeholder": "Escreva a sua questão...",
-    "greeting": "Olá! Posso ajudar a perceber qual serviço faz sentido para o seu caso. O que precisa de resolver?"
+    "bubble": "Testar o ARIA →",
+    "placeholder": "Escreva a sua dúvida...",
+    "greeting": "Sou o ARIA, a IA que a Rovieso constrói para os seus clientes. Pergunte o que quiser sobre automação, dados ou IA — esta conversa acontece com o mesmo motor que já está em produção."
   },
   "footer": {
     "tagline": "Automação, IA e sistemas à medida.",

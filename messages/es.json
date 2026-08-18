@@ -2,15 +2,15 @@
   "nav": {
     "services": "Servicios",
     "cases": "Casos",
-    "about": "Sobre nosotros",
+    "about": "Sobre",
     "contact": "Contacto"
   },
   "hero": {
     "eyebrow": "Automatización · IA · Sistemas a medida",
-    "title": "Su empresa todavía pierde tiempo con trabajo que debería funcionar solo.",
-    "subtitle": "Construimos automatizaciones, chatbots con IA y sistemas a medida que resuelven procesos manuales reales — sin complicación técnica de su parte.",
+    "title": "Tu empresa todavía pierde tiempo con trabajo que debería funcionar solo.",
+    "subtitle": "Construimos automatizaciones, chatbots con IA y sistemas a medida que resuelven procesos manuales de verdad — sin complicación técnica de tu lado.",
     "cta": "Hablar sobre mi proyecto",
-    "ctaSecondary": "Ver lo que hacemos"
+    "ctaSecondary": "Ver qué hacemos"
   },
   "chaos": {
     "title": "Esto se convierte en esto.",
@@ -18,61 +18,50 @@
     "after": "Estructura clara. Automatización. Control real."
   },
   "services": {
-    "title": "Lo que hacemos",
-    "subtitle": "Cinco formas de sacar su operación del modo manual.",
+    "title": "Qué hacemos",
+    "subtitle": "Cinco formas de sacar tu operación del modo manual.",
     "items": [
-      {
-        "name": "Automatización",
-        "description": "Tarea repetitiva que consume horas todos los días, funcionando sola."
-      },
-      {
-        "name": "Chatbot con IA",
-        "description": "Atención inteligente 24 horas, sin perder calidad."
-      },
-      {
-        "name": "Datos & Pipelines",
-        "description": "Hoja de cálculo desordenada convirtiéndose en información confiable."
-      },
-      {
-        "name": "Sistema a medida",
-        "description": "Proceso específico de su negocio, con herramienta propia."
-      },
-      {
-        "name": "Despliegue en la nube",
-        "description": "Infraestructura profesional, sin dolor de cabeza técnico."
-      }
+      { "name": "Automatización", "description": "Tarea repetitiva que consume horas cada día, funcionando sola." },
+      { "name": "Chatbot con IA", "description": "Atención inteligente 24 horas, sin perder calidad." },
+      { "name": "Datos & Pipelines", "description": "Hoja de cálculo desordenada convirtiéndose en información confiable." },
+      { "name": "Sistema a medida", "description": "Proceso específico de tu negocio, con herramienta propia." },
+      { "name": "Despliegue en la nube", "description": "Infraestructura profesional, sin dolor de cabeza técnico." }
     ]
   },
   "cases": {
     "title": "Prueba, no promesa",
-    "subtitle": "Sistemas reales, en producción — no un prototipo de portafolio.",
+    "subtitle": "Sistemas reales, en producción — no prototipo de portafolio.",
     "slrTitle": "Sistema de Logística Rovie (SLR)",
     "slrDescription": "Gestión completa de almacén con asistente de IA integrado, respondiendo consultas en lenguaje natural. En producción en AWS, todos los días.",
     "slrTag1": "FastAPI",
     "slrTag2": "React",
     "slrTag3": "AWS",
-    "slrTag4": "IA integrada"
+    "slrTag4": "IA integrada",
+    "layerProblem": "Hoja de cálculo manual, datos dispersos",
+    "layerBackend": "Backend FastAPI estructurando todo",
+    "layerAI": "IA (ARIA) interpretando y sugiriendo",
+    "layerDashboard": "Dashboard en tiempo real, decisión rápida"
   },
   "about": {
     "title": "Quién construye esto",
-    "body": "Antes de programar, yo gestionaba operaciones. Años de experiencia práctica en procesos industriales y logísticos me enseñaron dónde realmente falla un proceso — mucho antes de escribir la primera línea de código. Hoy uso esa experiencia para construir sistemas que resuelven el problema real, no solo lo que se ve bien en pantalla.",
+    "body": "Antes de programar, yo operaba. Años de experiencia práctica en procesos industriales y logísticos me enseñaron dónde realmente se traba un proceso — mucho antes de escribir la primera línea de código. Hoy uso esa vivencia para construir sistemas que resuelven el problema de verdad, no solo lo que se ve bonito en pantalla.",
     "signature": "Fundador de Rovieso"
   },
   "contact": {
-    "title": "Hablemos sobre su problema",
-    "subtitle": "Cuéntenos qué está frenando su operación — respondemos personalmente.",
-    "name": "Su nombre",
-    "email": "Su correo",
-    "message": "Cuéntenos qué necesita",
+    "title": "Hablemos sobre tu problema",
+    "subtitle": "Cuéntame qué está frenando tu operación — respondo personalmente.",
+    "name": "Tu nombre",
+    "email": "Tu correo",
+    "message": "Cuéntame qué necesitas",
     "submit": "Enviar mensaje",
-    "or": "o hable directamente por WhatsApp",
-    "success": "Mensaje enviado. Responderemos pronto.",
-    "error": "Algo salió mal. Inténtelo de nuevo o contáctenos por WhatsApp."
+    "or": "o habla directo por WhatsApp",
+    "success": "Mensaje enviado. Respuesta pronto.",
+    "error": "Algo salió mal. Intenta de nuevo o escribe por WhatsApp."
   },
   "chat": {
-    "bubble": "Hable con Rovieso",
-    "placeholder": "Escriba su consulta...",
-    "greeting": "¡Hola! Puedo ayudarle a entender qué servicio tiene sentido para su caso. ¿Qué necesita resolver?"
+    "bubble": "Prueba ARIA →",
+    "placeholder": "Escribe tu duda...",
+    "greeting": "Soy ARIA, la IA que Rovieso construye para sus clientes. Pregunta lo que quieras sobre automatización, datos o IA — esta conversación ocurre con el mismo motor que ya está en producción."
   },
   "footer": {
     "tagline": "Automatización, IA y sistemas a medida.",
