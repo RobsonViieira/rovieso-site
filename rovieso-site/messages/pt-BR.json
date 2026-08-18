@@ -1,0 +1,81 @@
+{
+  "nav": {
+    "services": "Serviços",
+    "cases": "Cases",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "hero": {
+    "eyebrow": "Automação · IA · Sistemas sob medida",
+    "title": "Sua empresa ainda perde tempo com trabalho que devia rodar sozinho.",
+    "subtitle": "Construímos automações, chatbots com IA e sistemas sob medida que resolvem processos manuais de verdade — sem complicação técnica do seu lado.",
+    "cta": "Falar sobre meu projeto",
+    "ctaSecondary": "Ver o que fazemos"
+  },
+  "chaos": {
+    "title": "Isso vira isso.",
+    "before": "Dados espalhados. Processo manual. Tempo perdido.",
+    "after": "Estrutura clara. Automação. Controle real."
+  },
+  "services": {
+    "title": "O que fazemos",
+    "subtitle": "Cinco formas de tirar sua operação do modo manual.",
+    "items": [
+      {
+        "name": "Automação",
+        "description": "Tarefa repetitiva que consome hora todo dia, rodando sozinha."
+      },
+      {
+        "name": "Chatbot com IA",
+        "description": "Atendimento inteligente 24 horas, sem perder qualidade."
+      },
+      {
+        "name": "Dados & Pipelines",
+        "description": "Planilha bagunçada virando informação confiável."
+      },
+      {
+        "name": "Sistema sob medida",
+        "description": "Processo específico do seu negócio, com ferramenta própria."
+      },
+      {
+        "name": "Deploy em nuvem",
+        "description": "Infraestrutura profissional, sem dor de cabeça técnica."
+      }
+    ]
+  },
+  "cases": {
+    "title": "Prova, não promessa",
+    "subtitle": "Sistemas reais, em produção — não protótipo de portfólio.",
+    "slrTitle": "Sistema de Logística Rovie (SLR)",
+    "slrDescription": "Gestão completa de armazém com assistente de IA integrado, respondendo consultas em linguagem natural. Rodando em produção na AWS, todos os dias.",
+    "slrTag1": "FastAPI",
+    "slrTag2": "React",
+    "slrTag3": "AWS",
+    "slrTag4": "IA integrada"
+  },
+  "about": {
+    "title": "Quem constrói isso",
+    "body": "Antes de programar, eu operava. Anos de experiência prática em processos industriais e logísticos me ensinaram onde um processo realmente trava — muito antes de eu escrever a primeira linha de código. Hoje uso essa vivência para construir sistemas que resolvem o problema de verdade, não só o que parece bonito na tela.",
+    "signature": "Fundador da Rovieso"
+  },
+  "contact": {
+    "title": "Vamos conversar sobre o seu problema",
+    "subtitle": "Conta o que está travando sua operação — respondo pessoalmente.",
+    "name": "Seu nome",
+    "email": "Seu e-mail",
+    "message": "Conte o que você precisa",
+    "submit": "Enviar mensagem",
+    "or": "ou fale direto pelo WhatsApp",
+    "success": "Mensagem enviada. Retorno em breve.",
+    "error": "Algo deu errado. Tenta de novo ou chama no WhatsApp."
+  },
+  "chat": {
+    "bubble": "Fale com a Rovieso",
+    "placeholder": "Digite sua dúvida...",
+    "greeting": "Olá! Posso ajudar a entender qual serviço faz sentido pro seu caso. O que você precisa resolver?"
+  },
+  "footer": {
+    "tagline": "Automação, IA e sistemas sob medida.",
+    "rights": "Todos os direitos reservados."
+  }
+}
