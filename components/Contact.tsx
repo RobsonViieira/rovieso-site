@@ -84,7 +84,7 @@ export default function Contact() {
         <p className="mt-6 text-sm text-white/40">
           {t("or")}{" "}
           <a
-            href="https://wa.me/55SEUNUMERO"
+            href="https://wa.me/5511922143722"
             className="text-cyan-soft underline underline-offset-2"
           >
             WhatsApp →
