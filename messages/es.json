@@ -21,11 +21,26 @@
     "title": "Qué hacemos",
     "subtitle": "Cinco formas de sacar tu operación del modo manual.",
     "items": [
-      { "name": "Automatización", "description": "Tarea repetitiva que consume horas cada día, funcionando sola." },
-      { "name": "Chatbot con IA", "description": "Atención inteligente 24 horas, sin perder calidad." },
-      { "name": "Datos & Pipelines", "description": "Hoja de cálculo desordenada convirtiéndose en información confiable." },
-      { "name": "Sistema a medida", "description": "Proceso específico de tu negocio, con herramienta propia." },
-      { "name": "Despliegue en la nube", "description": "Infraestructura profesional, sin dolor de cabeza técnico." }
+      {
+        "name": "Automatización",
+        "description": "Tarea repetitiva que consume horas cada día, funcionando sola."
+      },
+      {
+        "name": "Chatbot con IA",
+        "description": "Atención inteligente 24 horas, sin perder calidad."
+      },
+      {
+        "name": "Datos & Pipelines",
+        "description": "Hoja de cálculo desordenada convirtiéndose en información confiable."
+      },
+      {
+        "name": "Sistema a medida",
+        "description": "Proceso específico de tu negocio, con herramienta propia."
+      },
+      {
+        "name": "Despliegue en la nube",
+        "description": "Infraestructura profesional, sin dolor de cabeza técnico."
+      }
     ]
   },
   "cases": {
@@ -66,5 +81,9 @@
   "footer": {
     "tagline": "Automatización, IA y sistemas a medida.",
     "rights": "Todos los derechos reservados."
+  },
+  "meta": {
+    "title": "Rovieso — Software e IA para negocios que aún funcionan a mano",
+    "description": "Estudio de software e IA. Páginas de pedidos, automatización de procesos y sistemas a medida para pymes en España, Portugal y Brasil."
   }
 }

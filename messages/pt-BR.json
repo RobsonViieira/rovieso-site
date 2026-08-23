@@ -81,5 +81,9 @@
   "footer": {
     "tagline": "Automação, IA e sistemas sob medida.",
     "rights": "Todos os direitos reservados."
+  },
+  "meta": {
+    "title": "Rovieso — Software e IA para negócios que ainda funcionam no braço",
+    "description": "Estúdio de software e IA. Sistemas sob medida, automação de processos e integração com WhatsApp para pequenas empresas."
   }
 }
