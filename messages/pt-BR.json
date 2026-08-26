@@ -15,7 +15,22 @@
   "chaos": {
     "title": "Isso vira isso.",
     "before": "Dados espalhados. Processo manual. Tempo perdido.",
-    "after": "Estrutura clara. Automação. Controle real."
+    "after": "Estrutura clara. Automação. Controle real.",
+    "arquivoNome": "cadastro_orgaos.xlsx",
+    "dashboardNome": "dashboard · ao vivo",
+    "colOrgao": "ÓRGÃO",
+    "colCnpj": "CNPJ",
+    "colTelefone": "TELEFONE",
+    "colMunicipio": "MUNICÍPIO",
+    "duplicatas": "3 duplicatas",
+    "kpiRegistros": "cadastros únicos",
+    "kpiDuplicidade": "duplicidade removida",
+    "kpiValidado": "CNPJ validado",
+    "porFonte": "REGISTROS POR FONTE",
+    "statusLendo": "lendo 277 linhas…",
+    "statusIdentificando": "identificando repetições…",
+    "statusConsolidando": "consolidando registros…",
+    "statusPronto": "150 cadastros únicos · pronto"
   },
   "services": {
     "title": "O que fazemos",
@@ -85,5 +100,13 @@
   "meta": {
     "title": "Rovieso — Software e IA para negócios que ainda funcionam no braço",
     "description": "Estúdio de software e IA. Sistemas sob medida, automação de processos e integração com WhatsApp para pequenas empresas."
+  },
+  "aria": {
+    "status": "conectada ao estoque",
+    "placeholder": "Pergunte qualquer coisa sobre a operação…",
+    "q1": "quantas caixas do item 4471 ainda tem no galpão B?",
+    "a1": "37 caixas no galpão B, corredor 12. Saíram 14 esta semana — no ritmo atual acaba em 9 dias.",
+    "q2": "e se eu puxar do galpão A?",
+    "a2": "Galpão A tem 82. Transferindo 40, você cobre 4 semanas nos dois. Quer que eu gere a ordem de transferência?"
   }
 }

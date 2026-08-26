@@ -15,7 +15,22 @@
   "chaos": {
     "title": "Esto se convierte en esto.",
     "before": "Datos dispersos. Proceso manual. Tiempo perdido.",
-    "after": "Estructura clara. Automatización. Control real."
+    "after": "Estructura clara. Automatización. Control real.",
+    "arquivoNome": "registro_organismos.xlsx",
+    "dashboardNome": "dashboard · en vivo",
+    "colOrgao": "ORGANISMO",
+    "colCnpj": "CIF",
+    "colTelefone": "TELÉFONO",
+    "colMunicipio": "MUNICIPIO",
+    "duplicatas": "3 duplicados",
+    "kpiRegistros": "registros únicos",
+    "kpiDuplicidade": "duplicidad eliminada",
+    "kpiValidado": "CIF validado",
+    "porFonte": "REGISTROS POR FUENTE",
+    "statusLendo": "leyendo 277 líneas…",
+    "statusIdentificando": "identificando repeticiones…",
+    "statusConsolidando": "consolidando registros…",
+    "statusPronto": "150 registros únicos · listo"
   },
   "services": {
     "title": "Qué hacemos",
@@ -85,5 +100,13 @@
   "meta": {
     "title": "Rovieso — Software e IA para negocios que aún funcionan a mano",
     "description": "Estudio de software e IA. Páginas de pedidos, automatización de procesos y sistemas a medida para pymes en España, Portugal y Brasil."
+  },
+  "aria": {
+    "status": "conectada al almacén",
+    "placeholder": "Pregunta lo que quieras sobre la operación…",
+    "q1": "¿cuántas cajas del artículo 4471 quedan en la nave B?",
+    "a1": "37 cajas en la nave B, pasillo 12. Salieron 14 esta semana — a este ritmo se agota en 9 días.",
+    "q2": "¿y si traigo de la nave A?",
+    "a2": "La nave A tiene 82. Trasladando 40, cubres 4 semanas en ambas. ¿Genero la orden de traslado?"
   }
 }

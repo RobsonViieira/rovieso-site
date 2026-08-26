@@ -15,7 +15,22 @@
   "chaos": {
     "title": "Isto transforma-se nisto.",
     "before": "Dados espalhados. Processo manual. Tempo perdido.",
-    "after": "Estrutura clara. Automação. Controlo real."
+    "after": "Estrutura clara. Automação. Controlo real.",
+    "arquivoNome": "cadastro_orgaos.xlsx",
+    "dashboardNome": "dashboard · em direto",
+    "colOrgao": "ORGANISMO",
+    "colCnpj": "NIF",
+    "colTelefone": "TELEFONE",
+    "colMunicipio": "CONCELHO",
+    "duplicatas": "3 duplicados",
+    "kpiRegistros": "registos únicos",
+    "kpiDuplicidade": "duplicação removida",
+    "kpiValidado": "NIF validado",
+    "porFonte": "REGISTOS POR FONTE",
+    "statusLendo": "a ler 277 linhas…",
+    "statusIdentificando": "a identificar repetições…",
+    "statusConsolidando": "a consolidar registos…",
+    "statusPronto": "150 registos únicos · concluído"
   },
   "services": {
     "title": "O que fazemos",
@@ -85,5 +100,13 @@
   "meta": {
     "title": "Rovieso — Software e IA para negócios que ainda funcionam à mão",
     "description": "Estúdio de software e IA. Páginas de encomenda, automação de processos e sistemas à medida para PME em Portugal, Espanha e Brasil."
+  },
+  "aria": {
+    "status": "ligada ao stock",
+    "placeholder": "Pergunte o que quiser sobre a operação…",
+    "q1": "quantas caixas do artigo 4471 há ainda no armazém B?",
+    "a1": "37 caixas no armazém B, corredor 12. Saíram 14 esta semana — a este ritmo acaba em 9 dias.",
+    "q2": "e se eu puxar do armazém A?",
+    "a2": "O armazém A tem 82. Transferindo 40, cobre 4 semanas em ambos. Quer que gere a ordem de transferência?"
   }
 }
