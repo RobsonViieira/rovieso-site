@@ -1,8 +1,9 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useTranslations } from "next-intl";
+import AriaChat from "./AriaChat";
 
 const LAYERS = [
   { key: "layerProblem", color: "bg-red-500/20 border-red-400/30" },
@@ -10,6 +11,40 @@ const LAYERS = [
   { key: "layerAI", color: "bg-indigo/20 border-indigo-400/30" },
   { key: "layerDashboard", color: "bg-cyan/25 border-cyan/50" },
 ];
+
+/* Camada extraída para componente próprio.
+   Antes os useTransform ficavam dentro do .map() — isso viola as
+   Rules of Hooks (a contagem de hooks tem que ser estável entre
+   renders). Funcionava por acaso porque LAYERS tem tamanho fixo,
+   mas quebra no primeiro item condicional. Com um componente por
+   camada, cada instância tem seus próprios hooks. */
+function Camada({
+  progresso,
+  indice,
+  total,
+  cor,
+  texto,
+}: {
+  progresso: MotionValue<number>;
+  indice: number;
+  total: number;
+  cor: string;
+  texto: string;
+}) {
+  const inicio = indice / total;
+  const fim = inicio + 1 / total;
+  const opacity = useTransform(progresso, [inicio, fim], [0, 1]);
+  const x = useTransform(progresso, [inicio, fim], [-30, 0]);
+
+  return (
+    <motion.div
+      style={{ opacity, x }}
+      className={`rounded-lg border px-4 py-3 text-xs text-white/70 ${cor}`}
+    >
+      {texto}
+    </motion.div>
+  );
+}
 
 export default function Cases() {
   const t = useTranslations("cases");
@@ -52,28 +87,24 @@ export default function Cases() {
               </div>
             </div>
 
-            {/* Camadas do sistema revelando-se conforme rola */}
-            <div className="relative flex h-64 flex-col justify-center gap-2">
-              {LAYERS.map((layer, i) => {
-                const start = i / LAYERS.length;
-                const end = start + 1 / LAYERS.length;
-                const opacity = useTransform(
-                  scrollYProgress,
-                  [start, end],
-                  [0, 1]
-                );
-                const x = useTransform(scrollYProgress, [start, end], [-30, 0]);
+            {/* ARIA em funcionamento: mostra o assistente que a
+                descrição promete, em vez de só afirmar que existe */}
+            <AriaChat />
+          </div>
 
-                return (
-                  <motion.div
-                    key={layer.key}
-                    style={{ opacity, x }}
-                    className={`rounded-lg border px-4 py-3 text-xs text-white/70 ${layer.color}`}
-                  >
-                    {t(layer.key)}
-                  </motion.div>
-                );
-              })}
+          {/* Camadas do sistema revelando-se conforme rola */}
+          <div className="border-t border-white/10 px-8 pb-8 sm:px-10">
+            <div className="grid gap-2 pt-8 sm:grid-cols-2">
+              {LAYERS.map((layer, i) => (
+                <Camada
+                  key={layer.key}
+                  progresso={scrollYProgress}
+                  indice={i}
+                  total={LAYERS.length}
+                  cor={layer.color}
+                  texto={t(layer.key)}
+                />
+              ))}
             </div>
           </div>
         </div>
