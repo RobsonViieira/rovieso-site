@@ -108,5 +108,20 @@
     "a1": "37 caixas no armazém B, corredor 12. Saíram 14 esta semana — a este ritmo acaba em 9 dias.",
     "q2": "e se eu puxar do armazém A?",
     "a2": "O armazém A tem 82. Transferindo 40, cobre 4 semanas em ambos. Quer que gere a ordem de transferência?"
+  },
+  "testimonials": {
+    "title": "O que dizem",
+    "subtitle": "Resultado descrito por quem usa, não por quem vende.",
+    "nota": "Testemunhos de clientes acompanhados pela Rovieso.",
+    "verDepoimento": "Ver testemunho",
+    "items": [
+      {
+        "texto": "[EXEMPLO — SUBSTITUIR POR TESTEMUNHO REAL] Controlávamos tudo em folha de cálculo e andávamos sempre a refazer o mesmo trabalho. Em duas semanas o Robson entregou um sistema que fala com a nossa operação a sério. O que mais me marcou foi ter apontado o que NÃO dava para automatizar, em vez de prometer tudo.",
+        "nome": "Nome do cliente",
+        "cargo": "Cargo",
+        "empresa": "Empresa",
+        "iniciais": "NC"
+      }
+    ]
   }
 }

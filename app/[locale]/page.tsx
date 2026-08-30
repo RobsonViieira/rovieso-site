@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import ChaosToOrder from "@/components/ChaosToOrder";
 import Services from "@/components/Services";
 import Cases from "@/components/Cases";
+import Testimonials from "@/components/Testimonials";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -23,6 +24,7 @@ export default function Home({
       <ChaosToOrder />
       <Services />
       <Cases />
+      <Testimonials />
       <About />
       <Contact />
       <Footer />
