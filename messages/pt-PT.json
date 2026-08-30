@@ -10,7 +10,33 @@
     "title": "A sua empresa ainda perde tempo com trabalho que devia funcionar sozinho.",
     "subtitle": "Construímos automações, chatbots com IA e sistemas à medida que resolvem processos manuais a sério — sem complicação técnica do seu lado.",
     "cta": "Falar sobre o meu projeto",
-    "ctaSecondary": "Ver o que fazemos"
+    "ctaSecondary": "Ver o que fazemos",
+    "processos": [
+      {
+        "nome": "Conferência de faturas",
+        "det": "folha × ERP · 340 linhas",
+        "barra": 1,
+        "tempo": "2h"
+      },
+      {
+        "nome": "Atendimento no WhatsApp",
+        "det": "consulta de encomenda",
+        "barra": 1,
+        "tempo": "40min"
+      },
+      {
+        "nome": "Consolidação de registos",
+        "det": "4 ficheiros · 277 linhas",
+        "barra": 1,
+        "tempo": "6h"
+      },
+      {
+        "nome": "Publicação do sistema",
+        "det": "deploy + backup",
+        "barra": 1,
+        "tempo": "25min"
+      }
+    ]
   },
   "services": {
     "title": "O que fazemos",
