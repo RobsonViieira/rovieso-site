@@ -1,33 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import HeroVisual from "./HeroVisual";
 
-const COMMANDS = [
-  "$ git push origin main",
-  "✓ deploy iniciado...",
-  "$ pm2 restart api",
-  "✓ ARIA online",
-  "✓ sistema pronto.",
-];
+type Processo = { nome: string; det: string; barra: number; tempo: string };
 
 export default function Hero() {
   const t = useTranslations("hero");
-  const [lines, setLines] = useState<string[]>([]);
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i < COMMANDS.length) {
-        setLines((prev) => [...prev, COMMANDS[i]]);
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 500);
-    return () => clearInterval(interval);
-  }, []);
+  const processos = t.raw("processos") as Processo[];
 
   return (
     <section className="relative overflow-hidden bg-circuit-fade px-5 pb-14 pt-24 sm:px-6 sm:pb-20 sm:pt-36">
@@ -54,7 +35,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-5 max-w-xl text-[15px] sm:text-base text-white/60 sm:text-lg"
+          className="mx-auto mt-5 max-w-xl text-[15px] text-white/60 sm:text-lg"
         >
           {t("subtitle")}
         </motion.p>
@@ -63,29 +44,25 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mx-auto mt-8 max-w-md rounded-xl border border-white/10 bg-black/40 p-4 text-left font-mono text-xs text-cyan-soft sm:text-sm"
         >
-          {lines.map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-          <span className="animate-pulse">▍</span>
+          <HeroVisual rotulos={processos} />
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
             href="#contato"
-            className="focus-ring w-full rounded-lg bg-cyan px-6 py-3.5 text-center sm:w-auto sm:py-3 text-sm font-semibold text-navy-deep transition hover:shadow-glow"
+            className="focus-ring w-full rounded-lg bg-cyan px-6 py-3.5 text-center text-sm font-semibold text-navy-deep transition hover:shadow-glow sm:w-auto sm:py-3"
           >
             {t("cta")}
           </a>
           <a
             href="#servicos"
-            className="focus-ring w-full rounded-lg border border-white/15 px-6 py-3.5 text-center sm:w-auto sm:py-3 text-sm font-medium text-white/80 transition hover:border-cyan/40 hover:text-mist"
+            className="focus-ring w-full rounded-lg border border-white/15 px-6 py-3.5 text-center text-sm font-medium text-white/80 transition hover:border-cyan/40 hover:text-mist sm:w-auto sm:py-3"
           >
             {t("ctaSecondary")}
           </a>
