@@ -99,7 +99,7 @@ export default function ChaosToOrder() {
   return (
     <section
       ref={ref}
-      className="relative mx-auto max-w-6xl px-6 py-20 sm:py-28"
+      className="relative mx-auto max-w-6xl px-5 py-14 sm:px-6 sm:py-24"
     >
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-navy-deep">
         {/* barra de janela */}
@@ -120,10 +120,10 @@ export default function ChaosToOrder() {
         </div>
 
         {/* palco: as duas camadas ocupam o mesmo espaço e trocam por opacidade */}
-        <div className="relative min-h-[300px] p-5 sm:min-h-[340px] sm:p-7">
+        <div className="relative min-h-[268px] p-4 sm:min-h-[340px] sm:p-7">
           {/* ── camada planilha ── */}
           <div
-            className="absolute inset-0 p-5 sm:p-7"
+            className="absolute inset-0 p-4 sm:p-7"
             style={{
               opacity: naPlanilha ? 1 : 0,
               transform: naPlanilha ? "none" : "scale(.96)",
@@ -131,12 +131,14 @@ export default function ChaosToOrder() {
               pointerEvents: "none",
             }}
           >
-            <div className="mb-2 grid grid-cols-4 gap-x-3">
+            <div className="mb-2 grid grid-cols-2 gap-x-3 sm:grid-cols-4">
               {[t("colOrgao"), t("colCnpj"), t("colTelefone"), t("colMunicipio")].map(
-                (h) => (
+                (h, i) => (
                   <div
                     key={h}
-                    className="border-b border-white/10 pb-1.5 font-mono text-[9px] tracking-wider text-white/35 sm:text-[10px]"
+                    className={`border-b border-white/10 pb-1.5 font-mono text-[9px] tracking-wider text-white/35 sm:text-[10px] ${
+                      i > 1 ? "hidden sm:block" : ""
+                    }`}
                   >
                     {h}
                   </div>
@@ -151,7 +153,7 @@ export default function ChaosToOrder() {
               return (
                 <div
                   key={i}
-                  className="grid grid-cols-4 gap-x-3 rounded py-1.5"
+                  className="grid grid-cols-2 gap-x-3 rounded py-1.5 sm:grid-cols-4"
                   style={{
                     background: marcada ? "rgba(248,113,113,.14)" : "transparent",
                     outline: marcada ? "1px solid rgba(248,113,113,.45)" : "none",
@@ -166,7 +168,7 @@ export default function ChaosToOrder() {
                       key={j}
                       className={`truncate font-mono text-[10px] sm:text-[11px] ${
                         dup ? "text-white/40" : "text-white/75"
-                      }`}
+                      } ${j > 1 ? "hidden sm:block" : ""}`}
                     >
                       {cel}
                     </span>
@@ -189,7 +191,7 @@ export default function ChaosToOrder() {
 
           {/* ── camada dashboard ── */}
           <div
-            className="absolute inset-0 p-5 sm:p-7"
+            className="absolute inset-0 p-4 sm:p-7"
             style={{
               opacity: fase === 3 ? 1 : 0,
               transform: fase === 3 ? "none" : "scale(1.03)",
@@ -197,7 +199,7 @@ export default function ChaosToOrder() {
               pointerEvents: "none",
             }}
           >
-            <div className="mb-5 grid grid-cols-3 gap-2.5">
+            <div className="mb-4 grid grid-cols-3 gap-2 sm:mb-5 sm:gap-2.5">
               {kpis.map((k, i) => (
                 <div
                   key={k.l}

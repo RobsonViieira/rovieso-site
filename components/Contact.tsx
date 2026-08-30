@@ -37,7 +37,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contato" className="px-6 py-24">
+    <section id="contato" className="px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-2xl">
         <h2 className="font-display text-2xl font-medium text-mist sm:text-3xl">
           {t("title")}

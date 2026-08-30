@@ -30,7 +30,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-circuit-fade px-6 pb-20 pt-28 sm:pt-36">
+    <section className="relative overflow-hidden bg-circuit-fade px-5 pb-14 pt-24 sm:px-6 sm:pb-20 sm:pt-36">
       <div className="mx-auto max-w-3xl text-center">
         <motion.p
           initial={{ opacity: 0, y: 8 }}
@@ -45,7 +45,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="font-display text-3xl font-medium leading-tight text-mist sm:text-5xl"
+          className="font-display text-[26px] font-medium leading-[1.15] text-mist sm:text-5xl"
         >
           {t("title")}
         </motion.h1>
@@ -54,7 +54,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mx-auto mt-6 max-w-xl text-base text-white/60 sm:text-lg"
+          className="mx-auto mt-5 max-w-xl text-[15px] sm:text-base text-white/60 sm:text-lg"
         >
           {t("subtitle")}
         </motion.p>
@@ -75,17 +75,17 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          className="mt-8 flex w-full flex-col items-center justify-center gap-4 sm:flex-row"
         >
           <a
             href="#contato"
-            className="focus-ring rounded-lg bg-cyan px-6 py-3 text-sm font-semibold text-navy-deep transition hover:shadow-glow"
+            className="focus-ring w-full rounded-lg bg-cyan px-6 py-3.5 text-center sm:w-auto sm:py-3 text-sm font-semibold text-navy-deep transition hover:shadow-glow"
           >
             {t("cta")}
           </a>
           <a
             href="#servicos"
-            className="focus-ring rounded-lg border border-white/15 px-6 py-3 text-sm font-medium text-white/80 transition hover:border-cyan/40 hover:text-mist"
+            className="focus-ring w-full rounded-lg border border-white/15 px-6 py-3.5 text-center sm:w-auto sm:py-3 text-sm font-medium text-white/80 transition hover:border-cyan/40 hover:text-mist"
           >
             {t("ctaSecondary")}
           </a>

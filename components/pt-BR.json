@@ -1,0 +1,127 @@
+{
+  "nav": {
+    "services": "Serviços",
+    "cases": "Cases",
+    "about": "Sobre",
+    "contact": "Contato"
+  },
+  "hero": {
+    "eyebrow": "Automação · IA · Sistemas sob medida",
+    "title": "Sua empresa ainda perde tempo com trabalho que devia rodar sozinho.",
+    "subtitle": "Construímos automações, chatbots com IA e sistemas sob medida que resolvem processos manuais de verdade — sem complicação técnica do seu lado.",
+    "cta": "Falar sobre meu projeto",
+    "ctaSecondary": "Ver o que fazemos"
+  },
+  "chaos": {
+    "title": "Isso vira isso.",
+    "before": "Dados espalhados. Processo manual. Tempo perdido.",
+    "after": "Estrutura clara. Automação. Controle real.",
+    "arquivoNome": "cadastro_orgaos.xlsx",
+    "dashboardNome": "dashboard · ao vivo",
+    "colOrgao": "ÓRGÃO",
+    "colCnpj": "CNPJ",
+    "colTelefone": "TELEFONE",
+    "colMunicipio": "MUNICÍPIO",
+    "duplicatas": "3 duplicatas",
+    "kpiRegistros": "cadastros únicos",
+    "kpiDuplicidade": "duplicidade removida",
+    "kpiValidado": "CNPJ validado",
+    "porFonte": "REGISTROS POR FONTE",
+    "statusLendo": "lendo 277 linhas…",
+    "statusIdentificando": "identificando repetições…",
+    "statusConsolidando": "consolidando registros…",
+    "statusPronto": "150 cadastros únicos · pronto"
+  },
+  "services": {
+    "title": "O que fazemos",
+    "subtitle": "Cinco formas de tirar sua operação do modo manual.",
+    "items": [
+      {
+        "name": "Automação",
+        "description": "Tarefa repetitiva que consome hora todo dia, rodando sozinha."
+      },
+      {
+        "name": "Chatbot com IA",
+        "description": "Atendimento inteligente 24 horas, sem perder qualidade."
+      },
+      {
+        "name": "Dados & Pipelines",
+        "description": "Planilha bagunçada virando informação confiável."
+      },
+      {
+        "name": "Sistema sob medida",
+        "description": "Processo específico do seu negócio, com ferramenta própria."
+      },
+      {
+        "name": "Deploy em nuvem",
+        "description": "Infraestrutura profissional, sem dor de cabeça técnica."
+      }
+    ]
+  },
+  "cases": {
+    "title": "Prova, não promessa",
+    "subtitle": "Sistemas reais, em produção — não protótipo de portfólio.",
+    "slrTitle": "Sistema de Logística Rovie (SLR)",
+    "slrDescription": "Gestão completa de armazém com assistente de IA integrado, respondendo consultas em linguagem natural. Rodando em produção na AWS, todos os dias.",
+    "slrTag1": "FastAPI",
+    "slrTag2": "React",
+    "slrTag3": "AWS",
+    "slrTag4": "IA integrada",
+    "layerProblem": "Planilha manual, dados dispersos",
+    "layerBackend": "Backend FastAPI estruturando tudo",
+    "layerAI": "IA (ARIA) interpretando e sugerindo",
+    "layerDashboard": "Dashboard em tempo real, decisão rápida"
+  },
+  "about": {
+    "title": "Quem constrói isso",
+    "body": "Antes de programar, eu operava. Anos de experiência prática em processos industriais e logísticos me ensinaram onde um processo realmente trava — muito antes de eu escrever a primeira linha de código. Hoje uso essa vivência para construir sistemas que resolvem o problema de verdade, não só o que parece bonito na tela.",
+    "signature": "Fundador da Rovieso"
+  },
+  "contact": {
+    "title": "Vamos conversar sobre o seu problema",
+    "subtitle": "Conta o que está travando sua operação — respondo pessoalmente.",
+    "name": "Seu nome",
+    "email": "Seu e-mail",
+    "message": "Conte o que você precisa",
+    "submit": "Enviar mensagem",
+    "or": "ou fale direto pelo WhatsApp",
+    "success": "Mensagem enviada. Retorno em breve.",
+    "error": "Algo deu errado. Tenta de novo ou chama no WhatsApp."
+  },
+  "chat": {
+    "bubble": "Teste o ARIA →",
+    "placeholder": "Digite sua dúvida...",
+    "greeting": "Eu sou o ARIA, a IA que a Rovieso constrói pros seus clientes. Pergunta qualquer coisa sobre automação, dados ou IA — essa conversa acontece com o mesmo motor que já roda em produção."
+  },
+  "footer": {
+    "tagline": "Automação, IA e sistemas sob medida.",
+    "rights": "Todos os direitos reservados."
+  },
+  "meta": {
+    "title": "Rovieso — Software e IA para negócios que ainda funcionam no braço",
+    "description": "Estúdio de software e IA. Sistemas sob medida, automação de processos e integração com WhatsApp para pequenas empresas."
+  },
+  "aria": {
+    "status": "conectada ao estoque",
+    "placeholder": "Pergunte qualquer coisa sobre a operação…",
+    "q1": "quantas caixas do item 4471 ainda tem no galpão B?",
+    "a1": "37 caixas no galpão B, corredor 12. Saíram 14 esta semana — no ritmo atual acaba em 9 dias.",
+    "q2": "e se eu puxar do galpão A?",
+    "a2": "Galpão A tem 82. Transferindo 40, você cobre 4 semanas nos dois. Quer que eu gere a ordem de transferência?"
+  },
+  "testimonials": {
+    "title": "O que dizem",
+    "subtitle": "Resultado descrito por quem usa, não por quem vende.",
+    "nota": "Depoimentos de clientes atendidos pela Rovieso.",
+    "verDepoimento": "Ver depoimento",
+    "items": [
+      {
+        "texto": "[EXEMPLO — SUBSTITUIR POR DEPOIMENTO REAL] A gente controlava tudo em planilha e vivia refazendo o mesmo trabalho. Em duas semanas o Robson entregou um sistema que fala com a nossa operação de verdade. O que mais me pegou foi ele ter apontado o que NÃO dava pra automatizar, em vez de prometer tudo.",
+        "nome": "Nome do cliente",
+        "cargo": "Cargo",
+        "empresa": "Empresa",
+        "iniciais": "NC"
+      }
+    ]
+  }
+}

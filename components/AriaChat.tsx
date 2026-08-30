@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 
 /* ────────────────────────────────────────────────────────────────
    AriaChat — conversa que se digita sozinha, em loop.
@@ -155,8 +156,14 @@ export default function AriaChat() {
       <div className="overflow-hidden rounded-xl border border-cyan/20 bg-navy-deep">
         {/* cabeçalho */}
         <div className="flex items-center gap-3 border-b border-white/10 px-4 py-3">
-          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan text-[13px] font-bold text-navy-deep">
-            AR
+          <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full ring-1 ring-cyan/40">
+            <Image
+              src="/aria/aria-avatar.webp"
+              alt="ARIA"
+              fill
+              sizes="40px"
+              className="object-cover"
+            />
           </div>
           <div className="min-w-0">
             <div className="text-sm font-semibold leading-tight text-mist">ARIA</div>

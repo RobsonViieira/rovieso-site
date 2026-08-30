@@ -19,7 +19,7 @@ export default function Services() {
   const items = t.raw("items") as { name: string; description: string }[];
 
   return (
-    <section id="servicos" className="px-6 py-24">
+    <section id="servicos" className="px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mb-14 max-w-lg">
           <h2 className="font-display text-2xl font-medium text-mist sm:text-3xl">

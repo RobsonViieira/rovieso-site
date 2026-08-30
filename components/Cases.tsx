@@ -57,7 +57,7 @@ export default function Cases() {
   const tags = [t("slrTag1"), t("slrTag2"), t("slrTag3"), t("slrTag4")];
 
   return (
-    <section id="cases" ref={ref} className="px-6 py-24">
+    <section id="cases" ref={ref} className="px-6 py-16 sm:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="mb-12 max-w-lg">
           <h2 className="font-display text-2xl font-medium text-mist sm:text-3xl">
