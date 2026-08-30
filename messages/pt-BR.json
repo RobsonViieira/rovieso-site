@@ -12,49 +12,34 @@
     "cta": "Falar sobre meu projeto",
     "ctaSecondary": "Ver o que fazemos"
   },
-  "chaos": {
-    "title": "Isso vira isso.",
-    "before": "Dados espalhados. Processo manual. Tempo perdido.",
-    "after": "Estrutura clara. Automação. Controle real.",
-    "arquivoNome": "cadastro_orgaos.xlsx",
-    "dashboardNome": "dashboard · ao vivo",
-    "colOrgao": "ÓRGÃO",
-    "colCnpj": "CNPJ",
-    "colTelefone": "TELEFONE",
-    "colMunicipio": "MUNICÍPIO",
-    "duplicatas": "3 duplicatas",
-    "kpiRegistros": "cadastros únicos",
-    "kpiDuplicidade": "duplicidade removida",
-    "kpiValidado": "CNPJ validado",
-    "porFonte": "REGISTROS POR FONTE",
-    "statusLendo": "lendo 277 linhas…",
-    "statusIdentificando": "identificando repetições…",
-    "statusConsolidando": "consolidando registros…",
-    "statusPronto": "150 cadastros únicos · pronto"
-  },
   "services": {
     "title": "O que fazemos",
     "subtitle": "Cinco formas de tirar sua operação do modo manual.",
     "items": [
       {
         "name": "Automação",
-        "description": "Tarefa repetitiva que consome hora todo dia, rodando sozinha."
+        "description": "Duas telas abertas, conferindo linha por linha na mão.",
+        "example": "O financeiro conferia 340 notas por semana entre a planilha e o ERP. O script compara os dois às 6h e manda por e-mail só o que não bate — em média 4 linhas."
       },
       {
         "name": "Chatbot com IA",
-        "description": "Atendimento inteligente 24 horas, sem perder qualidade."
+        "description": "Você responde a mesma pergunta pela décima vez hoje.",
+        "example": "“Cadê meu pedido?” era 60% do WhatsApp comercial. O assistente consulta o sistema e responde em 2 segundos. O que não sabe, encaminha com o histórico anexado."
       },
       {
         "name": "Dados & Pipelines",
-        "description": "Planilha bagunçada virando informação confiável."
+        "description": "A mesma empresa cadastrada de três jeitos diferentes.",
+        "example": "277 linhas em 4 arquivos viraram 150 cadastros únicos, com CNPJ validado. Cada linha aponta pro arquivo de origem."
       },
       {
         "name": "Sistema sob medida",
-        "description": "Processo específico do seu negócio, com ferramenta própria."
+        "description": "O ERP não tem a etapa que a sua operação usa todo dia.",
+        "example": "Duas das quatro etapas do armazém não existiam em nenhum sistema pronto. Cada tela nasceu de uma etapa que já rodava no papel."
       },
       {
         "name": "Deploy em nuvem",
-        "description": "Infraestrutura profissional, sem dor de cabeça técnica."
+        "description": "Funciona na sua máquina. E fora dela?",
+        "example": "EC2 com Nginx, SSL, processos supervisionados e backup diário. Se o servidor reiniciar às 3h, tudo volta sozinho."
       }
     ]
   },
@@ -109,18 +94,33 @@
     "q2": "e se eu puxar do galpão A?",
     "a2": "Galpão A tem 82. Transferindo 40, você cobre 4 semanas nos dois. Quer que eu gere a ordem de transferência?"
   },
-  "testimonials": {
-    "title": "O que dizem",
-    "subtitle": "Resultado descrito por quem usa, não por quem vende.",
-    "nota": "Depoimentos de clientes atendidos pela Rovieso.",
-    "verDepoimento": "Ver depoimento",
-    "items": [
+  "proof": {
+    "title": "Números, não adjetivos",
+    "subtitle": "Cada métrica abaixo vem de um sistema em produção ou de uma entrega concluída. Todas verificáveis.",
+    "nota": "Métricas aferidas em projetos entregues. Documentação disponível sob solicitação.",
+    "metrics": [
       {
-        "texto": "[EXEMPLO — SUBSTITUIR POR DEPOIMENTO REAL] A gente controlava tudo em planilha e vivia refazendo o mesmo trabalho. Em duas semanas o Robson entregou um sistema que fala com a nossa operação de verdade. O que mais me pegou foi ele ter apontado o que NÃO dava pra automatizar, em vez de prometer tudo.",
-        "nome": "Nome do cliente",
-        "cargo": "Cargo",
-        "empresa": "Empresa",
-        "iniciais": "NC"
+        "valor": "45,8",
+        "unidade": "%",
+        "rotulo": "de redundância eliminada",
+        "contexto": "277 linhas de 4 arquivos oficiais consolidadas em 150 cadastros únicos."
+      },
+      {
+        "valor": "100",
+        "unidade": "%",
+        "rotulo": "de acerto na validação",
+        "contexto": "CNPJ, CEP, e-mail, município e UF conferidos contra gabarito, sem divergência."
+      },
+      {
+        "valor": "5",
+        "unidade": "s",
+        "rotulo": "do dado bruto à entrega",
+        "contexto": "Pipeline completo: extração, padronização, deduplicação e relatório."
+      },
+      {
+        "valor": "47",
+        "rotulo": "testes automatizados",
+        "contexto": "Cinco deles cobrem falhas reais já corrigidas, para que não voltem."
       }
     ]
   }
