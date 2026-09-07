@@ -9,7 +9,7 @@ const BASE = "https://rovieso.com.br";
 const LOCALES = ["pt-BR", "pt-PT", "es"] as const;
 
 // Adicionar aqui cada nova rota do site (sem o prefixo de idioma).
-const ROTAS = [""];
+const ROTAS = ["", "/privacidade", "/termos"];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const entradas: MetadataRoute.Sitemap = [];
