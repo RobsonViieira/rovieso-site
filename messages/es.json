@@ -3,7 +3,13 @@
     "services": "Servicios",
     "cases": "Casos",
     "about": "Sobre",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "pricing": "Inversión",
+    "faq": "Preguntas",
+    "menu": "Menú",
+    "abrir": "Abrir menú",
+    "fechar": "Cerrar menú",
+    "cta": "Hablar de mi proyecto"
   },
   "hero": {
     "eyebrow": "Automatización · IA · Sistemas a medida",
