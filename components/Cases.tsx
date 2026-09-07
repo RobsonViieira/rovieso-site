@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { useTranslations } from "next-intl";
 import AriaChat from "./AriaChat";
+import CaseDados from "./CaseDados";
 
 const LAYERS = [
   { key: "layerProblem", color: "bg-red-500/20 border-red-400/30" },
@@ -108,6 +109,9 @@ export default function Cases() {
             </div>
           </div>
         </div>
+
+        {/* Case 2: prova verificável — dashboard público e código aberto */}
+        <CaseDados />
       </div>
     </section>
   );
