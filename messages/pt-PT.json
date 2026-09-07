@@ -77,7 +77,7 @@
   },
   "cases": {
     "title": "Prova, não promessa",
-    "subtitle": "Sistemas reais, em produção — não protótipo de portefólio.",
+    "subtitle": "Dois sistemas em produção. Um deles com dashboard e código abertos para conferir.",
     "slrTitle": "Sistema de Logística Rovie (SLR)",
     "slrDescription": "Gestão completa de armazém com assistente de IA integrado, a responder consultas em linguagem natural. Em produção na AWS, todos os dias.",
     "slrTag1": "FastAPI",
@@ -405,5 +405,37 @@
         ]
       }
     ]
+  },
+  "caseDados": {
+    "titulo": "Consolidação de dados públicos",
+    "descricao": "Quatro ficheiros oficiais — duas folhas de cálculo com cabeçalho em linha diferente, dois PDF, um deles sem tabela nenhuma. A mesma câmara aparecia em três deles, escrita de três formas. Deu uma base única, com cada linha a apontar para o ficheiro de origem.",
+    "metricas": [
+      {
+        "v": "277 → 150",
+        "l": "linhas deram registos únicos"
+      },
+      {
+        "v": "100%",
+        "l": "de acerto em NIF, código postal e e-mail"
+      },
+      {
+        "v": "5s",
+        "l": "do dado bruto à entrega"
+      }
+    ],
+    "tags": [
+      "Python",
+      "pandas",
+      "pdfplumber",
+      "rapidfuzz"
+    ],
+    "ctaDashboard": "Ver o resultado →",
+    "ctaCodigo": "Código no GitHub",
+    "rotuloGrid": "UMA MARCA POR LINHA RECEBIDA",
+    "altGrid": "Grelha com 277 marcas; 127 delas, as repetidas, esmaecem",
+    "legendaUnica": "registo único",
+    "legendaRepetida": "repetição absorvida",
+    "ressalvaTitulo": "O que não foi preenchido:",
+    "ressalva": "31 telefones vieram sem indicativo em todas as fontes e assim ficaram, documentados no relatório de qualidade que acompanha a entrega. Completar por inferência produziria um dado que ninguém escreveu."
   }
 }

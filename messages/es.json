@@ -77,7 +77,7 @@
   },
   "cases": {
     "title": "Prueba, no promesa",
-    "subtitle": "Sistemas reales, en producción — no prototipo de portafolio.",
+    "subtitle": "Dos sistemas en producción. Uno con dashboard y código abiertos para que lo compruebes.",
     "slrTitle": "Sistema de Logística Rovie (SLR)",
     "slrDescription": "Gestión completa de almacén con asistente de IA integrado, respondiendo consultas en lenguaje natural. En producción en AWS, todos los días.",
     "slrTag1": "FastAPI",
@@ -405,5 +405,37 @@
         ]
       }
     ]
+  },
+  "caseDados": {
+    "titulo": "Consolidación de datos públicos",
+    "descricao": "Cuatro archivos oficiales — dos hojas de cálculo con la cabecera en filas distintas, dos PDF, uno de ellos sin tabla alguna. El mismo ayuntamiento aparecía en tres de ellos, escrito de tres formas. Se convirtió en una base única, con cada línea apuntando a su archivo de origen.",
+    "metricas": [
+      {
+        "v": "277 → 150",
+        "l": "líneas se volvieron registros únicos"
+      },
+      {
+        "v": "100%",
+        "l": "de acierto en CIF, código postal y correo"
+      },
+      {
+        "v": "5s",
+        "l": "del dato bruto a la entrega"
+      }
+    ],
+    "tags": [
+      "Python",
+      "pandas",
+      "pdfplumber",
+      "rapidfuzz"
+    ],
+    "ctaDashboard": "Ver el resultado →",
+    "ctaCodigo": "Código en GitHub",
+    "rotuloGrid": "UNA MARCA POR LÍNEA RECIBIDA",
+    "altGrid": "Rejilla con 277 marcas; 127 de ellas, las repetidas, se atenúan",
+    "legendaUnica": "registro único",
+    "legendaRepetida": "repetición absorbida",
+    "ressalvaTitulo": "Lo que no se rellenó:",
+    "ressalva": "31 teléfonos llegaron sin prefijo en todas las fuentes y así quedaron, documentados en el informe de calidad que acompaña la entrega. Completarlo por inferencia produciría un dato que nadie escribió."
   }
 }
