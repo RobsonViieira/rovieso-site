@@ -106,7 +106,10 @@
   },
   "footer": {
     "tagline": "Automação, IA e sistemas à medida.",
-    "rights": "Todos os direitos reservados."
+    "rights": "Todos os direitos reservados.",
+    "privacidade": "Privacidade",
+    "termos": "Termos",
+    "cnpj": "CNPJ 68.610.837/0001-96 · Itatiba, Brasil"
   },
   "meta": {
     "title": "Rovieso — Software e IA para negócios que ainda funcionam à mão",
@@ -147,6 +150,253 @@
         "valor": "47",
         "rotulo": "testes automatizados",
         "contexto": "Cinco cobrem falhas reais já corrigidas, para que não voltem."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Perguntas diretas, respostas diretas",
+    "subtitle": "O que perguntam antes de fechar. Se a sua não estiver aqui, é só escrever.",
+    "cta": "Fazer outra pergunta →",
+    "items": [
+      {
+        "p": "Vocês atendem empresa pequena?",
+        "r": "É o foco. Pequenas e médias empresas que ainda operam no manual — folhas de cálculo, caderno, WhatsApp. Não é preciso ter equipa de TI do seu lado."
+      },
+      {
+        "p": "Quanto tempo até o primeiro resultado?",
+        "r": "Um diagnóstico leva de 3 a 5 dias. A primeira automação funcionando, de 2 a 3 semanas, dependendo do quanto o processo já está documentado."
+      },
+      {
+        "p": "Preciso entender de tecnologia?",
+        "r": "Não. Você descreve o processo como ele acontece hoje, e eu traduzo em sistema. A entrega inclui treinamento de quem vai usar."
+      },
+      {
+        "p": "E se meus dados estiverem uma bagunça?",
+        "r": "É o cenário normal, não a exceção. Consolidação de folhas de cálculo e PDFs desiguais em uma base única é um dos serviços — inclusive quando a mesma empresa está registada de três formas diferentes."
+      },
+      {
+        "p": "O sistema funciona fora da minha máquina?",
+        "r": "Tudo é publicado em nuvem (AWS) com SSL, backup automático e reinício sozinho em caso de queda. Acesso de qualquer lugar, sem depender de um computador específico."
+      },
+      {
+        "p": "Meus dados ficam seguros?",
+        "r": "Acesso por perfil, tráfego criptografado, backup diário e nenhum dado compartilhado com terceiros. O tratamento segue o RGPD em Portugal e Espanha e a LGPD no Brasil."
+      },
+      {
+        "p": "O código é meu depois de pronto?",
+        "r": "Sim. Após a quitação, o código, os dados e o domínio são seus. Você pode levar para outro fornecedor a qualquer momento — não trabalho com dependência forçada."
+      },
+      {
+        "p": "E se eu não souber exatamente o que preciso?",
+        "r": "É a situação mais comum. O diagnóstico existe para isso: eu olho o processo, aponto o que dá e o que não dá para automatizar, e você decide com a informação na mão."
+      }
+    ]
+  },
+  "pricing": {
+    "title": "Quanto custa sair do manual",
+    "subtitle": "Faixas reais, não tabela de prateleira. O valor final sai depois do diagnóstico — nunca antes.",
+    "fatoresTitulo": "O que determina o valor do seu projeto",
+    "nota": "Valores em euro, para clientes em Portugal e Espanha. Projetos no Brasil são orçados em reais. Emito nota fiscal como MEI (CNPJ 68.610.837/0001-96).",
+    "fatores": [
+      "Quantidade e formato dos ficheiros ou sistemas envolvidos",
+      "Se o processo já está documentado ou só existe na cabeça de alguém",
+      "Volume de dados e frequência de execução",
+      "Necessidade de integração com sistema fechado sem API",
+      "Se a entrega inclui hospedagem e manutenção contínua",
+      "Prazo — urgência tem custo"
+    ],
+    "faixas": [
+      {
+        "nome": "Diagnóstico",
+        "para": "Antes de qualquer proposta",
+        "valor": "€ 60 – 100",
+        "unidade": "uma vez",
+        "itens": [
+          "Análise dos seus ficheiros ou processo real",
+          "Relatório do que é recuperável e do que não é",
+          "Estimativa de prazo e de esforço",
+          "Abatido do valor se você fechar o projeto"
+        ],
+        "cta": "Começar pelo diagnóstico"
+      },
+      {
+        "nome": "Projeto fechado",
+        "para": "Escopo definido, entrega completa",
+        "valor": "€ 250 – 900",
+        "unidade": "por projeto",
+        "destaque": true,
+        "itens": [
+          "Automação, pipeline de dados ou sistema sob medida",
+          "Publicação em nuvem com SSL e backup",
+          "Relatório de qualidade com o que ficou de fora e por quê",
+          "30 dias de ajuste após a entrega"
+        ],
+        "cta": "Falar sobre meu projeto"
+      },
+      {
+        "nome": "Acompanhamento",
+        "para": "Sistema que roda todo mês",
+        "valor": "€ 120 – 240",
+        "unidade": "por mês",
+        "itens": [
+          "Execução recorrente e monitoramento",
+          "Correção de mudanças na origem dos dados",
+          "Melhorias contínuas priorizadas por você",
+          "Sem fidelidade — cancele quando quiser"
+        ],
+        "cta": "Conversar sobre recorrência"
+      }
+    ]
+  },
+  "privacidade": {
+    "titulo": "Política de Privacidade",
+    "inicio": "Início",
+    "indice": "Nesta página",
+    "meta": "Como a Rovieso coleta, usa e protege dados pessoais, conforme LGPD e RGPD.",
+    "atualizado": "Atualizada em 02/09/2026",
+    "contatoTexto": "Para exercer qualquer direito sobre seus dados ou tirar dúvidas sobre esta política:",
+    "secoes": [
+      {
+        "id": "coleta",
+        "titulo": "Dados que coletamos",
+        "corpo": [
+          "Pelo formulário de contato: nome, e-mail e o conteúdo da mensagem enviada. São os dados mínimos para responder à sua solicitação.",
+          "Durante a execução de um projeto: os dados operacionais que você fornecer, tratados exclusivamente para a finalidade contratada.",
+          "Não coletamos dados de navegação para fins publicitários e não usamos cookies de terceiros."
+        ]
+      },
+      {
+        "id": "uso",
+        "titulo": "Como usamos",
+        "corpo": [
+          "Para responder ao seu contato, elaborar propostas e executar projetos contratados.",
+          "Dados de projeto são usados apenas para a finalidade acordada e nunca para treinar modelos, alimentar bases próprias ou compor produtos de terceiros.",
+          "Nunca vendemos, alugamos ou compartilhamos dados com terceiros para fins comerciais."
+        ]
+      },
+      {
+        "id": "direitos",
+        "titulo": "Seus direitos",
+        "corpo": [
+          "Você pode solicitar acesso, correção, portabilidade ou exclusão dos seus dados a qualquer momento, sem justificar o motivo.",
+          "Pedidos são atendidos em até 15 dias, conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018) no Brasil e o Regulamento Geral sobre a Proteção de Dados (UE 2016/679) em Portugal e Espanha.",
+          "Se você estiver na União Europeia, tem também o direito de apresentar reclamação à autoridade de controlo do seu país."
+        ]
+      },
+      {
+        "id": "retencao",
+        "titulo": "Por quanto tempo guardamos",
+        "corpo": [
+          "Mensagens de contato que não resultam em projeto são eliminadas em até 12 meses.",
+          "Dados de projeto são mantidos enquanto durar o contrato e por mais 6 meses após o encerramento, para eventual suporte. Depois disso, são apagados — ou devolvidos, se você preferir.",
+          "Documentos fiscais são mantidos pelo prazo exigido pela legislação tributária."
+        ]
+      },
+      {
+        "id": "seguranca",
+        "titulo": "Segurança",
+        "corpo": [
+          "Infraestrutura em nuvem AWS, com tráfego criptografado por TLS e acesso controlado por perfil.",
+          "Backups automáticos diários. Credenciais são gerenciadas por variável de ambiente e nunca ficam no código.",
+          "Nenhuma medida é infalível. Em caso de incidente que possa gerar risco aos seus dados, você é comunicado e a autoridade competente também, dentro do prazo legal."
+        ]
+      },
+      {
+        "id": "cookies",
+        "titulo": "Cookies",
+        "corpo": [
+          "Este site usa apenas cookies funcionais: preferência de idioma e, quando aplicável, tema visual.",
+          "Não há cookies de publicidade, rastreamento entre sites ou perfilamento comportamental."
+        ]
+      },
+      {
+        "id": "responsavel",
+        "titulo": "Responsável pelo tratamento",
+        "corpo": [
+          "Rovieso — Robson Vieira, MEI inscrito no CNPJ 68.610.837/0001-96, com sede em Itatiba, São Paulo, Brasil.",
+          "Contato para assuntos de privacidade: contato@rovieso.com.br"
+        ]
+      }
+    ]
+  },
+  "termos": {
+    "titulo": "Termos de Serviço",
+    "inicio": "Início",
+    "indice": "Nesta página",
+    "meta": "Condições de contratação, entrega, propriedade e suporte dos serviços da Rovieso.",
+    "atualizado": "Atualizados em 02/09/2026",
+    "contatoTexto": "Dúvidas sobre estes termos ou sobre uma proposta em andamento:",
+    "secoes": [
+      {
+        "id": "servico",
+        "titulo": "O que é prestado",
+        "corpo": [
+          "A Rovieso desenvolve automações de processo, pipelines de dados, chatbots com IA, sistemas sob medida e publicação em nuvem.",
+          "O escopo de cada trabalho é definido em proposta escrita, aceita por ambas as partes antes do início. Nada é executado sem escopo acordado."
+        ]
+      },
+      {
+        "id": "proposta",
+        "titulo": "Propostas e pagamento",
+        "corpo": [
+          "Toda proposta indica escopo, prazo estimado e valor. Propostas têm validade de 15 dias.",
+          "Projetos fechados são pagos em duas parcelas: 50% no aceite e 50% na entrega. Acompanhamento mensal é cobrado no início de cada ciclo.",
+          "O diagnóstico é cobrado à parte e abatido do valor do projeto, caso ele seja contratado.",
+          "Emito nota fiscal como MEI. Projetos em Portugal e Espanha são orçados e faturados em euro."
+        ]
+      },
+      {
+        "id": "prazo",
+        "titulo": "Prazos e alterações de escopo",
+        "corpo": [
+          "Prazos são estimativas de boa-fé, baseadas nas informações disponíveis no momento da proposta.",
+          "Se durante a execução surgirem requisitos não previstos, informo o impacto em prazo e valor antes de seguir. Nada é cobrado sem aprovação prévia.",
+          "Atrasos causados por indisponibilidade de informação ou de acesso do lado do cliente estendem o prazo na mesma proporção."
+        ]
+      },
+      {
+        "id": "propriedade",
+        "titulo": "Propriedade do que é entregue",
+        "corpo": [
+          "Após a quitação, o código-fonte, os dados e o domínio do projeto são do cliente, sem restrição de uso.",
+          "Bibliotecas e ferramentas internas de uso geral da Rovieso permanecem de sua propriedade, licenciadas ao cliente sem custo e sem prazo para o uso dentro do projeto entregue.",
+          "O cliente pode migrar para outro fornecedor a qualquer momento. Não trabalho com trava técnica nem com retenção de credenciais."
+        ]
+      },
+      {
+        "id": "suporte",
+        "titulo": "Suporte e disponibilidade",
+        "corpo": [
+          "Projetos fechados incluem 30 dias de ajuste após a entrega, para correções do que foi acordado no escopo.",
+          "Sistemas hospedados sob acompanhamento mensal têm monitoramento e restauração automática. Não há SLA contratual de disponibilidade nos planos atuais — se você precisar de um, converse comigo antes de fechar.",
+          "Não me responsabilizo por indisponibilidade de serviços de terceiros (provedores de nuvem, WhatsApp, gateways de pagamento) além do esforço razoável de contorno."
+        ]
+      },
+      {
+        "id": "limites",
+        "titulo": "Limites de responsabilidade",
+        "corpo": [
+          "Respondo pela qualidade da entrega conforme o escopo acordado.",
+          "Não me responsabilizo por decisões de negócio tomadas com base nos dados processados, nem por informação incorreta presente na origem — o relatório de qualidade que acompanha cada entrega documenta exatamente o que foi e o que não foi possível validar.",
+          "A responsabilidade total fica limitada ao valor pago pelo trabalho em questão."
+        ]
+      },
+      {
+        "id": "encerramento",
+        "titulo": "Encerramento",
+        "corpo": [
+          "Acompanhamento mensal pode ser cancelado a qualquer momento, sem multa, com aviso de 15 dias.",
+          "Em caso de encerramento, entrego código, dados e credenciais em até 10 dias úteis.",
+          "Projetos fechados interrompidos pelo cliente após o início são cobrados proporcionalmente ao que já foi executado."
+        ]
+      },
+      {
+        "id": "foro",
+        "titulo": "Lei aplicável",
+        "corpo": [
+          "Estes termos são regidos pela lei brasileira. Fica eleito o foro da comarca de Itatiba, São Paulo, para dirimir questões não resolvidas por acordo.",
+          "Para clientes em Portugal e Espanha, aplicam-se adicionalmente as normas de defesa do consumidor e proteção de dados locais quando mais favoráveis ao cliente."
+        ]
       }
     ]
   }
