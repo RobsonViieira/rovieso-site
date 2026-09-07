@@ -1,0 +1,36 @@
+import { unstable_setRequestLocale } from "next-intl/server";
+import Header from "@/components/Header";
+import Hero from "@/components/Hero";
+import Services from "@/components/Services";
+import Cases from "@/components/Cases";
+import Proof from "@/components/Proof";
+import Pricing from "@/components/Pricing";
+import Faq from "@/components/Faq";
+import About from "@/components/About";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
+
+export default function Home({
+  params: { locale },
+}: {
+  params: { locale: string };
+}) {
+  unstable_setRequestLocale(locale);
+
+  return (
+    <main>
+      <Header />
+      <Hero />
+      <Services />
+      <Cases />
+      <Proof />
+      <Pricing />
+      <About />
+      <Faq />
+      <Contact />
+      <Footer />
+      <ChatWidget />
+    </main>
+  );
+}
