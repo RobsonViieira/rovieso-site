@@ -31,3 +31,11 @@ body {
   outline: 2px solid #00d9ff;
   outline-offset: 3px;
 }
+
+/* Compensa o cabeçalho fixo ao navegar por âncora.
+   Sem isso, clicar em "Serviços" leva a seção para baixo da barra
+   e o título fica escondido. O valor cobre a altura do header
+   mais uma folga de respiro. */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
