@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consolidação de dados públicos — relatório</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ------------------------------------------------------------------
+   Direcao visual: formulario continuo de impressora matricial.
+   Papel pautado verde/branco, perfuracao lateral, tinta que borra.
+   E o vernaculo dos dados tabulares publicos que originaram o problema.
+   ------------------------------------------------------------------ */
+:root{
+  --papel:#F4F5F0;
+  --pauta:#CBDCC4;        /* verde do greenbar */
+  --pauta-forte:#A8C49E;
+  --tinta:#16211C;
+  --tinta-fraca:#5E6B62;
+  --carimbo:#A63D2F;      /* vermelho de carimbo de conferido */
+  --caneta:#2C4A7C;
+  --linha:#BCC4B8;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--papel);color:var(--tinta);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:15px;line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.folha{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,56px)}
+
+/* --- perfuracao lateral do formulario continuo --- */
+.tracao{
+  position:fixed;top:0;bottom:0;width:26px;z-index:1;
+  background:
+    repeating-linear-gradient(to bottom,
+      transparent 0 12px,
+      rgba(22,33,28,.16) 12px 20px,
+      transparent 20px 34px);
+  background-size:9px 34px;background-position:center;
+  background-repeat:repeat-y;
+  border-right:1px solid var(--linha);
+}
+.tracao.esq{left:0}
+.tracao.dir{right:0;border-right:0;border-left:1px solid var(--linha)}
+@media(max-width:900px){.tracao{display:none}}
+
+/* --- cabecalho tipo folha de rosto --- */
+header{padding:52px 0 30px;border-bottom:2px solid var(--tinta)}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-fraca);
+  display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;
+}
+.eyebrow b{color:var(--carimbo);font-weight:600}
+h1{
+  font-family:'Archivo',sans-serif;font-weight:900;
+  font-size:clamp(30px,6.2vw,60px);line-height:.96;
+  letter-spacing:-.03em;margin:0 0 14px;max-width:16ch;
+}
+.sub{font-size:clamp(15px,2vw,18px);color:var(--tinta-fraca);max-width:56ch;margin:0}
+
+/* --- hero: 277 tracos, 127 desligam --- */
+.tese{padding:44px 0 12px}
+.tese-topo{display:flex;justify-content:space-between;align-items:baseline;
+  gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.tese-rot{font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--tinta-fraca)}
+.marcas{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(11px,1fr));
+  gap:5px 4px;padding:22px;border:1px solid var(--linha);
+  background:#fff;
+}
+.m{height:19px;border-radius:1px;background:var(--caneta);opacity:.85}
+.m.dup{background:var(--carimbo)}
+@media(prefers-reduced-motion:no-preference){
+  .m{animation:surge .45s ease-out backwards}
+  .m.some{animation:apaga .5s ease-in forwards}
+}
+@keyframes surge{from{opacity:0;transform:scaleY(.2)}to{opacity:.85;transform:none}}
+@keyframes apaga{to{opacity:.1;transform:scaleY(.14)}}
+.legenda{display:flex;gap:22px;flex-wrap:wrap;margin-top:14px;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--tinta-fraca)}
+.legenda span{display:flex;align-items:center;gap:7px}
+.chip{width:11px;height:11px;border-radius:1px;display:inline-block}
+
+/* --- faixa de numeros --- */
+.numeros{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+  border:1px solid var(--linha);border-bottom:0;margin:38px 0 0;background:#fff}
+.num{padding:20px 22px;border-bottom:1px solid var(--linha);
+  border-right:1px solid var(--linha)}
+.num:last-child{border-right:0}
+.num .v{font-family:'Archivo',sans-serif;font-weight:900;font-size:38px;
+  line-height:1;letter-spacing:-.02em;display:block}
+.num .l{font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--tinta-fraca);
+  margin-top:9px;display:block}
+.num.destaque .v{color:var(--carimbo)}
+
+/* --- secoes --- */
+section{padding:52px 0 8px}
+h2{font-family:'Archivo',sans-serif;font-weight:700;font-size:22px;
+  letter-spacing:-.01em;margin:0 0 6px}
+.nota{color:var(--tinta-fraca);font-size:14px;margin:0 0 24px;max-width:62ch}
+.grade2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:34px}
+
+/* --- barras --- */
+.barra{margin-bottom:13px}
+.barra-topo{display:flex;justify-content:space-between;gap:12px;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;margin-bottom:5px}
+.barra-topo .n{color:var(--tinta-fraca)}
+.trilho{height:15px;background:#fff;border:1px solid var(--linha);position:relative}
+.preench{height:100%;background:var(--pauta-forte)}
+.preench.azul{background:var(--caneta);opacity:.82}
+.dupla{display:flex;flex-direction:column;gap:3px}
+.dupla .trilho{height:11px}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;
+  color:var(--tinta-fraca);width:44px;flex:none}
+.linha-dupla{display:flex;align-items:center;gap:8px}
+
+/* --- tabela greenbar --- */
+.busca{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+input,select{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  padding:9px 12px;border:1px solid var(--linha);background:#fff;
+  color:var(--tinta);border-radius:0;
+}
+input{flex:1;min-width:190px}
+input:focus,select:focus{outline:2px solid var(--caneta);outline-offset:-1px}
+.tabela-caixa{border:1px solid var(--linha);overflow-x:auto;background:#fff}
+table{width:100%;border-collapse:collapse;
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px}
+th{
+  text-align:left;padding:11px 13px;background:var(--tinta);color:var(--papel);
+  font-weight:500;letter-spacing:.07em;text-transform:uppercase;font-size:10.5px;
+  position:sticky;top:0;white-space:nowrap;
+}
+td{padding:9px 13px;border-bottom:1px solid rgba(22,33,28,.07);
+  white-space:nowrap;vertical-align:top}
+tbody tr:nth-child(odd){background:var(--pauta);background:rgba(203,220,196,.5)}
+tbody tr:hover{background:rgba(44,74,124,.09)}
+td.orgao{white-space:normal;min-width:230px;font-family:'IBM Plex Sans',sans-serif}
+.fusao{display:inline-block;font-size:10px;padding:1px 6px;
+  background:var(--carimbo);color:#fff;margin-left:7px;vertical-align:1px}
+.vazio{color:var(--tinta-fraca)}
+.contador{font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--tinta-fraca);margin-top:11px}
+
+/* --- ressalva: bloco de carimbo --- */
+.ressalva{border:2px solid var(--carimbo);padding:24px 26px;margin-top:14px;
+  background:#fff}
+.ressalva h3{font-family:'Archivo',sans-serif;font-size:15px;font-weight:700;
+  margin:0 0 9px;color:var(--carimbo);letter-spacing:.02em}
+.ressalva p{margin:0 0 13px;font-size:14px;max-width:64ch}
+.ressalva ul{margin:0;padding-left:19px;font-size:14px}
+.ressalva li{margin-bottom:5px}
+.ressalva li b{font-family:'IBM Plex Mono',monospace;font-weight:600}
+
+footer{border-top:2px solid var(--tinta);margin-top:56px;padding:24px 0 60px;
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--tinta-fraca);
+  display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer a{color:var(--caneta)}
+</style>
+</head>
+<body>
+<div class="tracao esq" aria-hidden="true"></div>
+<div class="tracao dir" aria-hidden="true"></div>
+
+<div class="folha">
+  <header>
+    <div class="eyebrow">
+      <span>Relatório de consolidação</span>
+      <span>4 arquivos oficiais · 2 XLSX · 2 PDF</span>
+      <span>Emitido em <b id="data"></b></span>
+    </div>
+    <h1>Quatro arquivos que não conversavam entre si</h1>
+    <p class="sub">Extração, padronização e deduplicação de cadastros de órgãos
+    públicos distribuídos em planilhas e PDFs. Cada linha do resultado aponta
+    de volta para o arquivo e a linha de onde veio.</p>
+  </header>
+
+  <div class="tese">
+    <div class="tese-topo">
+      <span class="tese-rot">Uma marca por linha recebida</span>
+      <span class="tese-rot" id="tese-num"></span>
+    </div>
+    <div class="marcas" id="marcas" role="img"
+         aria-label="Representação visual das linhas recebidas, com as redundantes esmaecidas"></div>
+    <div class="legenda">
+      <span><i class="chip" style="background:#2C4A7C"></i> entidade única mantida</span>
+      <span><i class="chip" style="background:#A63D2F"></i> repetição absorvida no merge</span>
+    </div>
+  </div>
+
+  <div class="numeros" id="numeros"></div>
+
+  <section>
+    <div class="grade2">
+      <div>
+        <h2>De onde veio cada linha</h2>
+        <p class="nota">Os quatro arquivos têm esquemas diferentes: cabeçalho em
+        linha variável, nomes de coluna distintos e, nos PDFs, tabela com grade
+        num e texto corrido rotulado no outro.</p>
+        <div id="fontes"></div>
+      </div>
+      <div>
+        <h2>Quantas fontes descreviam a mesma entidade</h2>
+        <p class="nota">Cluster de 1 significa que o órgão aparece em um arquivo
+        só. Quanto maior o cluster, mais fontes tinham o mesmo cadastro — e mais
+        campos o merge conseguiu completar.</p>
+        <div id="clusters"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>O que o merge preencheu</h2>
+    <p class="nota">Quando a mesma entidade aparece em mais de um arquivo, o
+    campo vazio de um registro é preenchido pelo gêmeo. Barra clara é antes,
+    barra azul é depois.</p>
+    <div id="preenchimento" style="max-width:560px"></div>
+  </section>
+
+  <section>
+    <h2>Distribuição por município</h2>
+    <p class="nota">22 municípios de SP e MG, com a grafia reconstruída a partir
+    da frequência das variantes — sem tabela externa de referência.</p>
+    <div class="grade2">
+      <div id="municipios"></div>
+      <div id="tipos"></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Resultado consolidado</h2>
+    <p class="nota">Uma linha por entidade. O selo indica quantos registros de
+    origem foram fundidos naquela linha.</p>
+    <div class="busca">
+      <input id="q" type="search" placeholder="Buscar órgão, CNPJ, e-mail…"
+             aria-label="Buscar nos registros">
+      <select id="mun" aria-label="Filtrar por município"></select>
+    </div>
+    <div class="tabela-caixa">
+      <table>
+        <thead><tr>
+          <th>Órgão</th><th>CNPJ</th><th>Município</th><th>UF</th>
+          <th>Endereço</th><th>CEP</th><th>Telefone</th><th>E-mail</th>
+          <th>Responsável</th>
+        </tr></thead>
+        <tbody id="corpo"></tbody>
+      </table>
+    </div>
+    <p class="contador" id="contador"></p>
+  </section>
+
+  <section>
+    <h2>O que não foi preenchido</h2>
+    <p class="nota">Campo ausente na origem permanece ausente. Completar por
+    inferência produziria um dado que ninguém digitou.</p>
+    <div class="ressalva">
+      <h3>Telefones sem DDD — <span id="r-total"></span> registros</h3>
+      <p>O número tem 8 dígitos e nenhuma fonte informou o código de área.
+      Os dígitos foram preservados e o registro está marcado.</p>
+      <ul>
+        <li><b id="r-orfao"></b> aparecem em uma única fonte, sem registro gêmeo de onde herdar</li>
+        <li><b id="r-todos"></b> aparecem em várias fontes, mas todas trouxeram o número incompleto</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <span>Pipeline em Python · pandas · pdfplumber · rapidfuzz</span>
+    <span><a href="https://github.com/RobsonViieira/rovieso-dados">Código no GitHub</a> · Rovieso</span>
+  </footer>
+</div>
+
+<script>
+const D = {"gerado":"22/08/2026","bruto":277,"final":150,"reducao":45.8,"fontes":{"orgaos_cadastro_2024.xlsx":85,"relacao_orgaos_estado.xlsx":85,"anexo_I_relacao.pdf":57,"anexo_II_descritivo.pdf":50},"clusters":{"1":64,"2":62,"3":13,"4":7,"5":2,"6":2},"municipios":{"Nazaré Paulista":7,"Extrema":7,"Itupeva":7,"Campinas":7,"Louveira":7,"Indaiatuba":7,"Valinhos":7,"Itatiba":7,"Várzea Paulista":7,"Jundiaí":7,"Jarinu":7,"Piracaia":7,"Atibaia":7,"Camanducaia":7,"Amparo":7,"Bom Jesus dos Perdões":7,"Bragança Paulista":7,"Toledo":7,"Campo Limpo Paulista":6,"Cabreúva":6,"Morungaba":6,"Vinhedo":6},"tipos":{"Secretaria de Obras e Serviços":22,"Secretaria Municipal de Educação":22,"Câmara Municipal":22,"Autarquia de Água e Esgoto":22,"Fundo Municipal de Assistência Social":21,"Secretaria Municipal de Saúde":21,"Prefeitura Municipal":20},"preenchimento":[{"campo":"cep","antes":93.9,"depois":100.0},{"campo":"email","antes":93.1,"depois":100.0},{"campo":"telefone","antes":100.0,"depois":100.0},{"campo":"responsavel","antes":76.5,"depois":95.3},{"campo":"cargo","antes":24.2,"depois":26.7}],"unidos_cnpj":127,"sem_ddd":31,"sem_ddd_orfao":16,"sem_ddd_todos":15,"registros":[{"nome_orgao":"Prefeitura Municipal de Nazaré Paulista","cnpj":"60.648.422/0001-08","municipio":"Nazaré Paulista","uf":"SP","endereco":"Rua Marechal Deodoro, 1354 - Jardim Paulista","cep":"12081-157","telefone":"+553545024039","email":"administracao@nazarepaulista.sp.gov.br","responsavel":"Roberto Costa Nascimento","cargo":"Secretário","qtd_registros_origem":"6","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Extrema","cnpj":"67.980.793/0001-23","municipio":"Extrema","uf":"MG","endereco":"Rua Sete de Setembro, 2054 - Chácara Urbana","cep":"13660-920","telefone":"+5535938271641","email":"ouvidoria@extrema.sp.gov.br","responsavel":"Patrícia Ferreira Oliveira","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Extrema","cnpj":"40.244.550/0001-70","municipio":"Extrema","uf":"MG","endereco":"Praça da Matriz, 2693 - Centro","cep":"13517-648","telefone":"+551134407163","email":"secretaria@extrema.sp.gov.br","responsavel":"Roberto Costa Ferreira","cargo":"","qtd_registros_origem":"4","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Itupeva","cnpj":"52.341.389/0001-32","municipio":"Itupeva","uf":"SP","endereco":"Rua Marechal Deodoro, 1168 - Bairro Alto","cep":"12420-530","telefone":"+5535974185842","email":"secretaria@itupeva.sp.gov.br","responsavel":"Luciana Ferreira Santos","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Prefeitura Municipal de Campinas","cnpj":"38.657.191/0001-31","municipio":"Campinas","uf":"SP","endereco":"Praça Nossa Senhora do Belém, 1616 - Chácara Urbana","cep":"12484-298","telefone":"+551938046345","email":"secretaria@campinas.sp.gov.br","responsavel":"Carlos Oliveira Ferreira","cargo":"Prefeita","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Louveira","cnpj":"95.944.064/0001-57","municipio":"Louveira","uf":"SP","endereco":"Rua XV de Novembro, 201 - Bairro Alto","cep":"13588-818","telefone":"34484115","email":"protocolo@louveira.sp.gov.br","responsavel":"Luciana Gomes Oliveira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Itupeva","cnpj":"34.578.610/0001-99","municipio":"Itupeva","uf":"SP","endereco":"Rua São João, S/N - Bairro Alto","cep":"13201-564","telefone":"+5519952372480","email":"gabinete@itupeva.sp.gov.br","responsavel":"Marcos Souza Souza","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Indaiatuba","cnpj":"97.516.136/0001-90","municipio":"Indaiatuba","uf":"SP","endereco":"Rua Marechal Deodoro, S/N - Jardim Paulista","cep":"12453-341","telefone":"32339693","email":"contato@indaiatuba.mg.gov.br","responsavel":"Roberto Gomes Oliveira","cargo":"Secretário","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Valinhos","cnpj":"47.525.534/0001-03","municipio":"Valinhos","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, S/N - Vila Santa Cruz","cep":"12334-473","telefone":"+551943104598","email":"contato@valinhos.sp.gov.br","responsavel":"Juliana Pereira Santos","cargo":"Diretora","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Prefeitura Municipal de Extrema","cnpj":"91.334.123/0001-14","municipio":"Extrema","uf":"MG","endereco":"Praça da Matriz, 11 - Chácara Urbana","cep":"12596-033","telefone":"+551944398438","email":"ouvidoria@extrema.sp.gov.br","responsavel":"Camila Gomes Ferreira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Itatiba","cnpj":"92.185.156/0001-02","municipio":"Itatiba","uf":"SP","endereco":"Rua Marechal Deodoro, S/N - Vila Nova","cep":"13621-654","telefone":"+553544486846","email":"ouvidoria@itatiba.sp.gov.br","responsavel":"Fernanda Martins Martins","cargo":"Secretário","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Campo Limpo Paulista","cnpj":"48.018.451/0001-82","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Vila Santa Cruz","cep":"13039-934","telefone":"43089317","email":"contato@campolimpopaulista.sp.gov.br","responsavel":"Patrícia Nascimento Silva","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Várzea Paulista","cnpj":"84.044.997/0001-71","municipio":"Várzea Paulista","uf":"SP","endereco":"Praça da Matriz, S/N - Vila Santa Cruz","cep":"12932-955","telefone":"+551134897274","email":"secretaria@varzeapaulista.sp.gov.br","responsavel":"Roberto Rodrigues Rodrigues","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Jundiaí","cnpj":"71.167.190/0001-84","municipio":"Jundiaí","uf":"SP","endereco":"Praça da Matriz, 2306 - Vila Nova","cep":"13142-782","telefone":"+553542664697","email":"administracao@jundiai.sp.gov.br","responsavel":"Fernanda Ferreira Rodrigues","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Piracaia","cnpj":"05.685.662/0001-66","municipio":"Piracaia","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Bairro Alto","cep":"12615-878","telefone":"48731944","email":"secretaria@piracaia.mg.gov.br","responsavel":"Ana Rodrigues Souza","cargo":"Diretora","qtd_registros_origem":"4","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Indaiatuba","cnpj":"47.735.866/0001-04","municipio":"Indaiatuba","uf":"SP","endereco":"Praça da Matriz, 2707 - Bairro Alto","cep":"13634-252","telefone":"+5511935267225","email":"ouvidoria@indaiatuba.sp.gov.br","responsavel":"José Silva Pereira","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Campinas","cnpj":"81.143.744/0001-67","municipio":"Campinas","uf":"SP","endereco":"Rua Barão de Jundiaí, S/N - Jardim América","cep":"12872-756","telefone":"+551148231751","email":"contato@campinas.sp.gov.br","responsavel":"Paulo Almeida Ferreira","cargo":"Prefeita","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Nazaré Paulista","cnpj":"29.221.699/0001-00","municipio":"Nazaré Paulista","uf":"SP","endereco":"Rua Sete de Setembro, S/N - Jardim América","cep":"13973-351","telefone":"32827762","email":"ouvidoria@nazarepaulista.mg.gov.br","responsavel":"André Martins Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Itupeva","cnpj":"86.938.068/0001-31","municipio":"Itupeva","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Chácara Urbana","cep":"12161-404","telefone":"+551148449467","email":"administracao@itupeva.sp.gov.br","responsavel":"José Almeida Oliveira","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Piracaia","cnpj":"06.865.086/0001-00","municipio":"Piracaia","uf":"SP","endereco":"Rua Sete de Setembro, S/N - Jardim Paulista","cep":"12871-137","telefone":"+551948632373","email":"administracao@piracaia.mg.gov.br","responsavel":"Carlos Silva Martins","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Prefeitura Municipal de Jarinu","cnpj":"15.430.391/0001-51","municipio":"Jarinu","uf":"SP","endereco":"Avenida Brasil, S/N - Vila Nova","cep":"13939-562","telefone":"+551942427932","email":"administracao@jarinu.sp.gov.br","responsavel":"Roberto Pereira Rodrigues","cargo":"","qtd_registros_origem":"3","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Louveira","cnpj":"09.728.962/0001-36","municipio":"Louveira","uf":"SP","endereco":"Avenida Presidente Kennedy, 2346 - Vila Nova","cep":"12903-321","telefone":"34177723","email":"administracao@louveira.mg.gov.br","responsavel":"Roberto Martins Silva","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Campo Limpo Paulista","cnpj":"81.080.132/0001-72","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Avenida Dom Pedro I, 876 - Vila Nova","cep":"12004-399","telefone":"+551944268973","email":"contato@campolimpopaulista.sp.gov.br","responsavel":"Marcos Martins Nascimento","cargo":"Diretora","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Atibaia","cnpj":"21.277.997/0001-00","municipio":"Atibaia","uf":"SP","endereco":"Avenida Presidente Kennedy, S/N - Bairro Alto","cep":"12309-450","telefone":"36205500","email":"gabinete@atibaia.sp.gov.br","responsavel":"Ricardo Almeida Silva","cargo":"Diretor","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Camanducaia","cnpj":"14.919.058/0001-48","municipio":"Camanducaia","uf":"MG","endereco":"Avenida Dom Pedro I, S/N - Centro","cep":"13684-501","telefone":"+551943018532","email":"contato@camanducaia.sp.gov.br","responsavel":"Fernanda Ferreira Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Cabreúva","cnpj":"79.970.246/0001-46","municipio":"Cabreúva","uf":"SP","endereco":"Praça da Matriz, 2842 - Centro","cep":"13821-900","telefone":"+5535987855400","email":"gabinete@cabreuva.sp.gov.br","responsavel":"Fernanda Pereira Almeida","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Várzea Paulista","cnpj":"29.451.168/0001-03","municipio":"Várzea Paulista","uf":"SP","endereco":"Avenida Dom Pedro I, 2129 - Bairro Alto","cep":"13610-717","telefone":"+553538592843","email":"contato@varzeapaulista.sp.gov.br","responsavel":"Camila Santos Santos","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Camanducaia","cnpj":"04.709.521/0001-73","municipio":"Camanducaia","uf":"MG","endereco":"Avenida Getúlio Vargas, 1025 - Vila Nova","cep":"13087-513","telefone":"+551146888894","email":"protocolo@camanducaia.sp.gov.br","responsavel":"José Almeida Santos","cargo":"Secretária","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Campo Limpo Paulista","cnpj":"51.585.064/0001-32","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Rua São João, S/N - Jardim Paulista","cep":"12103-805","telefone":"+551146114362","email":"administracao@campolimpopaulista.sp.gov.br","responsavel":"André Souza Costa","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Nazaré Paulista","cnpj":"85.786.527/0001-46","municipio":"Nazaré Paulista","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Vila Santa Cruz","cep":"12393-980","telefone":"+551934605876","email":"protocolo@nazarepaulista.sp.gov.br","responsavel":"Ricardo Costa Almeida","cargo":"","qtd_registros_origem":"3","fontes":"anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Bom Jesus dos Perdões","cnpj":"15.814.491/0001-81","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Avenida Getúlio Vargas, 1563 - Bairro Alto","cep":"12970-160","telefone":"+5511974069941","email":"ouvidoria@bomjesusdosperdoes.sp.gov.br","responsavel":"Camila Martins Gomes","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Campinas","cnpj":"33.565.880/0001-00","municipio":"Campinas","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, 1017 - Chácara Urbana","cep":"12155-567","telefone":"+551934475408","email":"ouvidoria@campinas.sp.gov.br","responsavel":"Ricardo Martins Souza","cargo":"Secretária","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Prefeitura Municipal de Bragança Paulista","cnpj":"46.990.139/0001-20","municipio":"Bragança Paulista","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, S/N - Bairro Alto","cep":"12620-979","telefone":"+551149702922","email":"contato@bragancapaulista.sp.gov.br","responsavel":"Juliana Souza Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Toledo","cnpj":"47.772.522/0001-75","municipio":"Toledo","uf":"MG","endereco":"Rua Coronel Rodrigues Alves, 754 - Vila Santa Cruz","cep":"13718-867","telefone":"+5535911047756","email":"ouvidoria@toledo.sp.gov.br","responsavel":"Maria Souza Nascimento","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Valinhos","cnpj":"86.652.404/0001-85","municipio":"Valinhos","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, S/N - Jardim Paulista","cep":"12438-206","telefone":"+551944255450","email":"gabinete@valinhos.sp.gov.br","responsavel":"Carlos Silva Gomes","cargo":"","qtd_registros_origem":"3","fontes":"anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Indaiatuba","cnpj":"91.463.031/0001-34","municipio":"Indaiatuba","uf":"SP","endereco":"Avenida Dom Pedro I, 2508 - Jardim América","cep":"12244-012","telefone":"+551133359133","email":"administracao@indaiatuba.sp.gov.br","responsavel":"Fernanda Oliveira Costa","cargo":"Diretor","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Louveira","cnpj":"36.519.941/0001-83","municipio":"Louveira","uf":"SP","endereco":"Rua XV de Novembro, 2646 - Bairro Alto","cep":"12188-926","telefone":"+5511985521829","email":"administracao@louveira.sp.gov.br","responsavel":"Ricardo Silva Rodrigues","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Extrema","cnpj":"20.153.368/0001-05","municipio":"Extrema","uf":"MG","endereco":"Rua Coronel Rodrigues Alves, S/N - Jardim América","cep":"12196-050","telefone":"+553540053516","email":"protocolo@extrema.sp.gov.br","responsavel":"André Gomes Gomes","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Campo Limpo Paulista","cnpj":"00.766.177/0001-01","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Avenida Brasil, S/N - Centro","cep":"12563-639","telefone":"36657240","email":"administracao@campolimpopaulista.sp.gov.br","responsavel":"Juliana Santos Martins","cargo":"Secretária","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Bom Jesus dos Perdões","cnpj":"93.588.916/0001-95","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Avenida Presidente Kennedy, 1417 - Vila Nova","cep":"12023-658","telefone":"+553547449123","email":"contato@bomjesusdosperdoes.sp.gov.br","responsavel":"Carlos Costa Pereira","cargo":"Secretaria","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Campinas","cnpj":"01.051.238/0001-09","municipio":"Campinas","uf":"SP","endereco":"Praça da Matriz, 2294 - Chácara Urbana","cep":"13633-414","telefone":"+5511980807481","email":"ouvidoria@campinas.sp.gov.br","responsavel":"Marcos Rodrigues Rodrigues","cargo":"Secretária","qtd_registros_origem":"6","fontes":"anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Piracaia","cnpj":"27.722.170/0001-36","municipio":"Piracaia","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Jardim América","cep":"13669-556","telefone":"+5519941315687","email":"gabinete@piracaia.mg.gov.br","responsavel":"José Costa Rodrigues","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Morungaba","cnpj":"35.116.155/0001-72","municipio":"Morungaba","uf":"SP","endereco":"Rua Marechal Deodoro, 2989 - Vila Santa Cruz","cep":"13992-944","telefone":"46986925","email":"contato@morungaba.sp.gov.br","responsavel":"Carlos Pereira Santos","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Bragança Paulista","cnpj":"18.324.210/0001-09","municipio":"Bragança Paulista","uf":"SP","endereco":"Praça da Matriz, S/N - Chácara Urbana","cep":"12959-705","telefone":"35579199","email":"secretaria@bragancapaulista.sp.gov.br","responsavel":"Juliana Martins Costa","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Bom Jesus dos Perdões","cnpj":"73.763.116/0001-56","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Rua Sete de Setembro, 1913 - Jardim Paulista","cep":"12124-412","telefone":"+551932235073","email":"contato@bomjesusdosperdoes.sp.gov.br","responsavel":"Ana Pereira Almeida","cargo":"Prefeita","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Campinas","cnpj":"64.647.154/0001-52","municipio":"Campinas","uf":"SP","endereco":"Rua São João, S/N - Chácara Urbana","cep":"12277-311","telefone":"+551942707224","email":"protocolo@campinas.sp.gov.br","responsavel":"André Gomes Ferreira","cargo":"Diretora","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Câmara Municipal de Itupeva","cnpj":"68.222.394/0001-66","municipio":"Itupeva","uf":"SP","endereco":"Rua São João, 2749 - Bairro Alto","cep":"13320-562","telefone":"+551935132608","email":"ouvidoria@itupeva.sp.gov.br","responsavel":"Paulo Oliveira Gomes","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Prefeitura Municipal de Camanducaia","cnpj":"04.332.181/0001-04","municipio":"Camanducaia","uf":"MG","endereco":"Rua Marechal Deodoro, S/N - Vila Nova","cep":"13149-203","telefone":"+553538594611","email":"administracao@camanducaia.sp.gov.br","responsavel":"Camila Oliveira Martins","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Itatiba","cnpj":"17.518.636/0001-22","municipio":"Itatiba","uf":"SP","endereco":"Rua São João, S/N - Vila Santa Cruz","cep":"13159-872","telefone":"+551945611793","email":"gabinete@itatiba.sp.gov.br","responsavel":"Maria Santos Oliveira","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Camanducaia","cnpj":"01.666.870/0001-67","municipio":"Camanducaia","uf":"MG","endereco":"Avenida Presidente Kennedy, 339 - Bairro Alto","cep":"13320-803","telefone":"49942562","email":"gabinete@camanducaia.sp.gov.br","responsavel":"Roberto Ferreira Almeida","cargo":"Prefeita","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Extrema","cnpj":"27.065.379/0001-74","municipio":"Extrema","uf":"MG","endereco":"Avenida Getúlio Vargas, S/N - Jardim América","cep":"13851-855","telefone":"+551941688218","email":"protocolo@extrema.sp.gov.br","responsavel":"Juliana Oliveira Souza","cargo":"","qtd_registros_origem":"1","fontes":"orgaos_cadastro_2024.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Várzea Paulista","cnpj":"61.797.968/0001-85","municipio":"Várzea Paulista","uf":"SP","endereco":"Praça Nossa Senhora do Belém, 2834 - Bairro Alto","cep":"13436-916","telefone":"+553531742791","email":"contato@varzeapaulista.sp.gov.br","responsavel":"Luciana Ferreira Silva","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Itupeva","cnpj":"91.088.398/0001-15","municipio":"Itupeva","uf":"SP","endereco":"Praça da Matriz, 2132 - Jardim Paulista","cep":"13468-597","telefone":"+551139121911","email":"contato@itupeva.sp.gov.br","responsavel":"Maria Nascimento Almeida","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Piracaia","cnpj":"35.615.951/0001-50","municipio":"Piracaia","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, 1267 - Jardim América","cep":"13427-302","telefone":"972113851","email":"administracao@piracaia.sp.gov.br","responsavel":"Maria Pereira Pereira","cargo":"Diretora","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Piracaia","cnpj":"51.286.823/0001-66","municipio":"Piracaia","uf":"SP","endereco":"Rua XV de Novembro, 1897 - Vila Santa Cruz","cep":"13686-235","telefone":"+551935644088","email":"gabinete@piracaia.sp.gov.br","responsavel":"Camila Silva Souza","cargo":"Prefeita","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Amparo","cnpj":"68.784.991/0001-84","municipio":"Amparo","uf":"SP","endereco":"Praça da Matriz, S/N - Vila Santa Cruz","cep":"13546-147","telefone":"+553540241659","email":"gabinete@amparo.sp.gov.br","responsavel":"Ricardo Nascimento Almeida","cargo":"Secretário","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Jundiaí","cnpj":"43.805.719/0001-02","municipio":"Jundiaí","uf":"SP","endereco":"Avenida Presidente Kennedy, 2651 - Vila Nova","cep":"13419-680","telefone":"49596122","email":"gabinete@jundiai.sp.gov.br","responsavel":"Marcos Almeida Souza","cargo":"","qtd_registros_origem":"5","fontes":"anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Cabreúva","cnpj":"62.676.586/0001-66","municipio":"Cabreúva","uf":"SP","endereco":"Avenida Brasil, S/N - Vila Nova","cep":"12150-818","telefone":"+5519952782715","email":"protocolo@cabreuva.sp.gov.br","responsavel":"Roberto Santos Nascimento","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Jundiaí","cnpj":"67.240.049/0001-92","municipio":"Jundiaí","uf":"SP","endereco":"Rua Marechal Deodoro, 1166 - Jardim Paulista","cep":"13821-961","telefone":"+553533942845","email":"contato@jundiai.sp.gov.br","responsavel":"Roberto Oliveira Silva","cargo":"","qtd_registros_origem":"4","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Vinhedo","cnpj":"44.510.762/0001-03","municipio":"Vinhedo","uf":"SP","endereco":"Praça da Matriz, S/N - Centro","cep":"13764-759","telefone":"922756129","email":"secretaria@vinhedo.sp.gov.br","responsavel":"Juliana Pereira Santos","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Itatiba","cnpj":"39.904.902/0001-98","municipio":"Itatiba","uf":"SP","endereco":"Rua Barão de Jundiaí, S/N - Vila Santa Cruz","cep":"13300-833","telefone":"+551138366460","email":"ouvidoria@itatiba.sp.gov.br","responsavel":"Juliana Martins Almeida","cargo":"Presidente","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Morungaba","cnpj":"47.170.999/0001-80","municipio":"Morungaba","uf":"SP","endereco":"Avenida Brasil, 797 - Bairro Alto","cep":"13085-305","telefone":"+551133083250","email":"protocolo@morungaba.sp.gov.br","responsavel":"Ricardo Oliveira Costa","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Vinhedo","cnpj":"18.914.117/0001-46","municipio":"Vinhedo","uf":"SP","endereco":"Rua São João, S/N - Jardim América","cep":"12604-164","telefone":"+553534258875","email":"contato@vinhedo.sp.gov.br","responsavel":"José Ferreira Gomes","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Atibaia","cnpj":"75.618.537/0001-19","municipio":"Atibaia","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Bairro Alto","cep":"13692-721","telefone":"+5535963703430","email":"ouvidoria@atibaia.sp.gov.br","responsavel":"Patrícia Silva Gomes","cargo":"Secretário","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Bragança Paulista","cnpj":"09.232.719/0001-22","municipio":"Bragança Paulista","uf":"SP","endereco":"Rua São João, S/N - Vila Santa Cruz","cep":"13592-838","telefone":"914206111","email":"ouvidoria@bragancapaulista.mg.gov.br","responsavel":"Roberto Souza Santos","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Bragança Paulista","cnpj":"45.228.851/0001-24","municipio":"Bragança Paulista","uf":"SP","endereco":"Rua Sete de Setembro, 2338 - Jardim Paulista","cep":"13797-867","telefone":"+551130517240","email":"gabinete@bragancapaulista.sp.gov.br","responsavel":"Camila Oliveira Pereira","cargo":"","qtd_registros_origem":"4","fontes":"anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Bragança Paulista","cnpj":"76.724.238/0001-21","municipio":"Bragança Paulista","uf":"SP","endereco":"Praça Nossa Senhora do Belém, 1755 - Jardim América","cep":"12283-521","telefone":"+551147632796","email":"ouvidoria@bragancapaulista.sp.gov.br","responsavel":"Marcos Santos Rodrigues","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Jundiaí","cnpj":"97.700.886/0001-18","municipio":"Jundiaí","uf":"SP","endereco":"Rua XV de Novembro, S/N - Centro","cep":"13651-962","telefone":"+551140733439","email":"contato@jundiai.sp.gov.br","responsavel":"Paulo Pereira Rodrigues","cargo":"Presidente","qtd_registros_origem":"5","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Valinhos","cnpj":"91.357.759/0001-81","municipio":"Valinhos","uf":"SP","endereco":"Avenida Presidente Kennedy, S/N - Bairro Alto","cep":"13963-438","telefone":"+551146094629","email":"protocolo@valinhos.sp.gov.br","responsavel":"Roberto Costa Almeida","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Várzea Paulista","cnpj":"21.202.169/0001-02","municipio":"Várzea Paulista","uf":"SP","endereco":"Rua Barão de Jundiaí, S/N - Vila Santa Cruz","cep":"13595-367","telefone":"+551148023140","email":"secretaria@varzeapaulista.sp.gov.br","responsavel":"Maria Santos Pereira","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Indaiatuba","cnpj":"52.694.958/0001-23","municipio":"Indaiatuba","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Chácara Urbana","cep":"12754-339","telefone":"+551141956040","email":"ouvidoria@indaiatuba.mg.gov.br","responsavel":"Marcos Almeida Pereira","cargo":"","qtd_registros_origem":"4","fontes":"anexo_II_descritivo.pdf | orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Jundiaí","cnpj":"29.014.767/0001-51","municipio":"Jundiaí","uf":"SP","endereco":"Rua Marechal Deodoro, 1119 - Jardim América","cep":"12227-290","telefone":"+553540796053","email":"contato@jundiai.sp.gov.br","responsavel":"Maria Souza Pereira","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Morungaba","cnpj":"75.818.141/0001-15","municipio":"Morungaba","uf":"SP","endereco":"Praça da Matriz, 604 - Centro","cep":"13672-461","telefone":"+551138119224","email":"contato@morungaba.sp.gov.br","responsavel":"Carlos Silva Costa","cargo":"","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Vinhedo","cnpj":"81.685.054/0001-30","municipio":"Vinhedo","uf":"SP","endereco":"Praça da Matriz, S/N - Vila Nova","cep":"12317-079","telefone":"+551141059626","email":"ouvidoria@vinhedo.sp.gov.br","responsavel":"Ana Ferreira Rodrigues","cargo":"Secretário","qtd_registros_origem":"2","fontes":"orgaos_cadastro_2024.xlsx | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Nazaré Paulista","cnpj":"12.604.223/0001-47","municipio":"Nazaré Paulista","uf":"SP","endereco":"Praça da Matriz, 2770 - Chácara Urbana","cep":"13182-647","telefone":"+553539252237","email":"secretaria@nazarepaulista.sp.gov.br","responsavel":"Paulo Almeida Almeida","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Toledo","cnpj":"24.118.244/0001-31","municipio":"Toledo","uf":"MG","endereco":"Rua Marechal Deodoro, S/N - Vila Santa Cruz","cep":"12514-927","telefone":"+551146985533","email":"gabinete@toledo.sp.gov.br","responsavel":"Fernanda Oliveira Martins","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Atibaia","cnpj":"17.525.007/0001-20","municipio":"Atibaia","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Chácara Urbana","cep":"12265-629","telefone":"+553538788821","email":"gabinete@atibaia.sp.gov.br","responsavel":"Paulo Silva Costa","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Vinhedo","cnpj":"26.788.861/0001-70","municipio":"Vinhedo","uf":"SP","endereco":"Rua XV de Novembro, S/N - Bairro Alto","cep":"12025-298","telefone":"44844977","email":"administracao@vinhedo.sp.gov.br","responsavel":"Ana Pereira Pereira","cargo":"Secretário","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Vinhedo","cnpj":"84.210.205/0001-91","municipio":"Vinhedo","uf":"SP","endereco":"Rua São João, S/N - Centro","cep":"13519-431","telefone":"+551139758344","email":"protocolo@vinhedo.sp.gov.br","responsavel":"Patrícia Souza Ferreira","cargo":"Diretor","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Louveira","cnpj":"55.905.992/0001-98","municipio":"Louveira","uf":"SP","endereco":"Rua Marechal Deodoro, S/N - Vila Nova","cep":"12077-092","telefone":"+551130409625","email":"gabinete@louveira.sp.gov.br","responsavel":"Camila Oliveira Costa","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Jarinu","cnpj":"80.913.431/0001-88","municipio":"Jarinu","uf":"SP","endereco":"Avenida Dom Pedro I, 2596 - Chácara Urbana","cep":"13421-306","telefone":"+551131145806","email":"protocolo@jarinu.sp.gov.br","responsavel":"Juliana Ferreira Gomes","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Valinhos","cnpj":"34.074.517/0001-47","municipio":"Valinhos","uf":"SP","endereco":"Rua Barão de Jundiaí, 1627 - Jardim América","cep":"12339-630","telefone":"46491972","email":"protocolo@valinhos.sp.gov.br","responsavel":"Ana Costa Martins","cargo":"Diretor","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Atibaia","cnpj":"80.861.317/0001-51","municipio":"Atibaia","uf":"SP","endereco":"Avenida Brasil, S/N - Vila Santa Cruz","cep":"12850-854","telefone":"+5519933697284","email":"administracao@atibaia.sp.gov.br","responsavel":"André Santos Pereira","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Valinhos","cnpj":"52.866.929/0001-00","municipio":"Valinhos","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Vila Santa Cruz","cep":"13002-295","telefone":"+551139231878","email":"protocolo@valinhos.mg.gov.br","responsavel":"Carlos Rodrigues Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Cabreúva","cnpj":"20.863.536/0001-48","municipio":"Cabreúva","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, S/N - Centro","cep":"12367-228","telefone":"+551131418620","email":"protocolo@cabreuva.sp.gov.br","responsavel":"José Nascimento Almeida","cargo":"Secretária","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Valinhos","cnpj":"05.648.149/0001-03","municipio":"Valinhos","uf":"SP","endereco":"Avenida Presidente Kennedy, S/N - Centro","cep":"13759-580","telefone":"+5519926852889","email":"ouvidoria@valinhos.sp.gov.br","responsavel":"André Silva Souza","cargo":"Diretora","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Indaiatuba","cnpj":"69.137.367/0001-58","municipio":"Indaiatuba","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Centro","cep":"13453-518","telefone":"+551140731474","email":"contato@indaiatuba.mg.gov.br","responsavel":"Maria Souza Silva","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Nazaré Paulista","cnpj":"70.435.811/0001-09","municipio":"Nazaré Paulista","uf":"SP","endereco":"Praça da Matriz, 2204 - Jardim Paulista","cep":"12431-686","telefone":"+551138682702","email":"administracao@nazarepaulista.sp.gov.br","responsavel":"Roberto Rodrigues Gomes","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Toledo","cnpj":"52.892.268/0001-89","municipio":"Toledo","uf":"MG","endereco":"Rua XV de Novembro, S/N - Vila Nova","cep":"12660-957","telefone":"+551149269501","email":"gabinete@toledo.sp.gov.br","responsavel":"Patrícia Pereira Oliveira","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Atibaia","cnpj":"37.498.941/0001-07","municipio":"Atibaia","uf":"SP","endereco":"Rua São João, S/N - Centro","cep":"12561-046","telefone":"+553549333068","email":"gabinete@atibaia.mg.gov.br","responsavel":"Ricardo Almeida Almeida","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Louveira","cnpj":"16.571.208/0001-09","municipio":"Louveira","uf":"SP","endereco":"Praça da Matriz, S/N - Bairro Alto","cep":"12657-292","telefone":"31834804","email":"ouvidoria@louveira.sp.gov.br","responsavel":"Ana Rodrigues Oliveira","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Amparo","cnpj":"22.583.132/0001-26","municipio":"Amparo","uf":"SP","endereco":"Rua São João, S/N - Chácara Urbana","cep":"13253-905","telefone":"44688842","email":"secretaria@amparo.sp.gov.br","responsavel":"José Oliveira Costa","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Jarinu","cnpj":"32.016.328/0001-92","municipio":"Jarinu","uf":"SP","endereco":"Rua Barão de Jundiaí, 498 - Vila Nova","cep":"13367-543","telefone":"45468251","email":"ouvidoria@jarinu.mg.gov.br","responsavel":"Patrícia Almeida Oliveira","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Indaiatuba","cnpj":"55.625.881/0001-28","municipio":"Indaiatuba","uf":"SP","endereco":"Rua Sete de Setembro, 1096 - Vila Santa Cruz","cep":"12198-051","telefone":"+551938565067","email":"contato@indaiatuba.sp.gov.br","responsavel":"Roberto Costa Souza","cargo":"","qtd_registros_origem":"2","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Bom Jesus dos Perdões","cnpj":"35.387.584/0001-84","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Praça da Matriz, S/N - Centro","cep":"12262-758","telefone":"+553545623999","email":"ouvidoria@bomjesusdosperdoes.sp.gov.br","responsavel":"Roberto Pereira Rodrigues","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Cabreúva","cnpj":"73.395.004/0001-90","municipio":"Cabreúva","uf":"SP","endereco":"Rua Barão de Jundiaí, 2755 - Jardim América","cep":"13735-110","telefone":"+551144896992","email":"secretaria@cabreuva.sp.gov.br","responsavel":"Marcos Nascimento Souza","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Amparo","cnpj":"41.541.520/0001-99","municipio":"Amparo","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Chácara Urbana","cep":"13441-097","telefone":"32714705","email":"ouvidoria@amparo.sp.gov.br","responsavel":"Paulo Santos Rodrigues","cargo":"","qtd_registros_origem":"1","fontes":"relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Louveira","cnpj":"62.475.107/0001-43","municipio":"Louveira","uf":"SP","endereco":"Rua São João, S/N - Vila Santa Cruz","cep":"12271-955","telefone":"+551137565669","email":"secretaria@louveira.sp.gov.br","responsavel":"Marcos Gomes Nascimento","cargo":"Diretor","qtd_registros_origem":"3","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Vinhedo","cnpj":"95.171.870/0001-30","municipio":"Vinhedo","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, 2682 - Chácara Urbana","cep":"12693-638","telefone":"+551947446383","email":"ouvidoria@vinhedo.mg.gov.br","responsavel":"Paulo Gomes Martins","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Amparo","cnpj":"65.905.151/0001-34","municipio":"Amparo","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Jardim América","cep":"13193-679","telefone":"+551943437421","email":"administracao@amparo.sp.gov.br","responsavel":"Patrícia Rodrigues Gomes","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Camanducaia","cnpj":"78.713.315/0001-73","municipio":"Camanducaia","uf":"MG","endereco":"Rua XV de Novembro, S/N - Centro","cep":"13449-646","telefone":"+5511915146413","email":"administracao@camanducaia.sp.gov.br","responsavel":"Carlos Nascimento Oliveira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Toledo","cnpj":"67.721.903/0001-32","municipio":"Toledo","uf":"MG","endereco":"Avenida Getúlio Vargas, S/N - Vila Nova","cep":"13158-760","telefone":"+553541722871","email":"administracao@toledo.sp.gov.br","responsavel":"André Silva Martins","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Amparo","cnpj":"32.966.851/0001-80","municipio":"Amparo","uf":"SP","endereco":"Avenida Dom Pedro I, 576 - Jardim América","cep":"12013-267","telefone":"+551135466400","email":"administracao@amparo.sp.gov.br","responsavel":"Luciana Costa Martins","cargo":"Prefeita","qtd_registros_origem":"4","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Itatiba","cnpj":"27.868.144/0001-10","municipio":"Itatiba","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, 1170 - Vila Nova","cep":"12277-873","telefone":"+5519982922438","email":"ouvidoria@itatiba.mg.gov.br","responsavel":"Luciana Costa Martins","cargo":"Diretor","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Bom Jesus dos Perdões","cnpj":"08.488.725/0001-82","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Chácara Urbana","cep":"12812-372","telefone":"+551147363717","email":"administracao@bomjesusdosperdoes.sp.gov.br","responsavel":"Marcos Ferreira Gomes","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Várzea Paulista","cnpj":"36.576.615/0001-08","municipio":"Várzea Paulista","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Jardim Paulista","cep":"12137-093","telefone":"+551145247105","email":"contato@varzeapaulista.sp.gov.br","responsavel":"Patrícia Nascimento Costa","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Campo Limpo Paulista","cnpj":"73.872.148/0001-90","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Avenida Presidente Kennedy, S/N - Jardim Paulista","cep":"12460-825","telefone":"950118784","email":"gabinete@campolimpopaulista.sp.gov.br","responsavel":"Marcos Souza Martins","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Autarquia de Água e Esgoto de Morungaba","cnpj":"34.873.471/0001-26","municipio":"Morungaba","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, S/N - Vila Santa Cruz","cep":"12283-154","telefone":"+551944464505","email":"secretaria@morungaba.sp.gov.br","responsavel":"Juliana Silva Souza","cargo":"","qtd_registros_origem":"4","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Jarinu","cnpj":"14.530.385/0001-03","municipio":"Jarinu","uf":"SP","endereco":"Avenida Dom Pedro I, 1863 - Jardim Paulista","cep":"12211-720","telefone":"47095314","email":"administracao@jarinu.sp.gov.br","responsavel":"Juliana Costa Ferreira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Campo Limpo Paulista","cnpj":"26.841.459/0001-01","municipio":"Campo Limpo Paulista","uf":"SP","endereco":"Rua São João, S/N - Chácara Urbana","cep":"12851-718","telefone":"+551946424578","email":"contato@campolimpopaulista.sp.gov.br","responsavel":"Camila Santos Nascimento","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Câmara Municipal de Bragança Paulista","cnpj":"44.720.999/0001-19","municipio":"Bragança Paulista","uf":"SP","endereco":"Rua São João, 1688 - Centro","cep":"12572-392","telefone":"+5519996145082","email":"gabinete@bragancapaulista.mg.gov.br","responsavel":"Paulo Almeida Nascimento","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Atibaia","cnpj":"50.648.909/0001-29","municipio":"Atibaia","uf":"SP","endereco":"Rua XV de Novembro, 2678 - Jardim Paulista","cep":"12853-454","telefone":"+551139713508","email":"ouvidoria@atibaia.sp.gov.br","responsavel":"Juliana Gomes Santos","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Educação de Bom Jesus dos Perdões","cnpj":"90.295.939/0001-13","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Avenida Brasil, 577 - Vila Nova","cep":"12654-171","telefone":"+551143726500","email":"gabinete@bomjesusdosperdoes.sp.gov.br","responsavel":"José Costa Pereira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Prefeitura Municipal de Valinhos","cnpj":"55.426.221/0001-18","municipio":"Valinhos","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Chácara Urbana","cep":"13479-218","telefone":"+5535977458248","email":"contato@valinhos.sp.gov.br","responsavel":"Camila Santos Ferreira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Várzea Paulista","cnpj":"01.128.059/0001-22","municipio":"Várzea Paulista","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Jardim América","cep":"13840-366","telefone":"+5535926846794","email":"administracao@varzeapaulista.mg.gov.br","responsavel":"Marcos Martins Oliveira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria de Obras e Serviços de Itatiba","cnpj":"53.962.185/0001-81","municipio":"Itatiba","uf":"SP","endereco":"Avenida Brasil, 2229 - Chácara Urbana","cep":"12089-650","telefone":"+551930336850","email":"gabinete@itatiba.sp.gov.br","responsavel":"Luciana Santos Ferreira","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Itupeva","cnpj":"21.689.421/0001-41","municipio":"Itupeva","uf":"SP","endereco":"Rua XV de Novembro, S/N - Chácara Urbana","cep":"12701-923","telefone":"+551933377609","email":"contato@itupeva.sp.gov.br","responsavel":"Carlos Martins Silva","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Fundo Municipal de Assistência Social de Toledo","cnpj":"68.516.048/0001-90","municipio":"Toledo","uf":"MG","endereco":"Avenida Brasil, S/N - Vila Santa Cruz","cep":"13684-653","telefone":"39651410","email":"administracao@toledo.sp.gov.br","responsavel":"Luciana Santos Gomes","cargo":"","qtd_registros_origem":"2","fontes":"anexo_I_relacao.pdf | relacao_orgaos_estado.xlsx"},{"nome_orgao":"Secretaria Municipal de Saúde de Amparo","cnpj":"58.771.753/0001-80","municipio":"Amparo","uf":"SP","endereco":"Rua Sete de Setembro, S/N - Jardim Paulista","cep":"12033-267","telefone":"+553538555836","email":"contato@amparo.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Nazaré Paulista","cnpj":"37.550.375/0001-35","municipio":"Nazaré Paulista","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Jardim Paulista","cep":"12233-099","telefone":"968185783","email":"administracao@nazarepaulista.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Educação de Jundiaí","cnpj":"73.830.284/0001-17","municipio":"Jundiaí","uf":"SP","endereco":"Rua São João, S/N - Vila Santa Cruz","cep":"12485-309","telefone":"+553538465923","email":"gabinete@jundiai.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Autarquia de Água e Esgoto de Louveira","cnpj":"22.602.563/0001-92","municipio":"Louveira","uf":"SP","endereco":"Avenida Getúlio Vargas, 443 - Bairro Alto","cep":"13758-481","telefone":"+551139426728","email":"contato@louveira.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Jarinu","cnpj":"84.161.692/0001-40","municipio":"Jarinu","uf":"SP","endereco":"Praça Nossa Senhora do Belém, S/N - Jardim Paulista","cep":"12627-456","telefone":"+553544128272","email":"secretaria@jarinu.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Prefeitura Municipal de Piracaia","cnpj":"71.545.168/0001-20","municipio":"Piracaia","uf":"SP","endereco":"Rua XV de Novembro, 1893 - Centro","cep":"13061-370","telefone":"+551945561845","email":"protocolo@piracaia.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Câmara Municipal de Extrema","cnpj":"75.973.832/0001-93","municipio":"Extrema","uf":"MG","endereco":"Rua XV de Novembro, S/N - Jardim Paulista","cep":"13947-343","telefone":"+553545116038","email":"contato@extrema.sp.gov.br","responsavel":"","cargo":"","qtd_registros_origem":"1","fontes":"anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Itupeva","cnpj":"85.642.059/0001-36","municipio":"Itupeva","uf":"SP","endereco":"Rua São João, 240 - Vila Santa Cruz","cep":"13570-598","telefone":"949515366","email":"ouvidoria@itupeva.sp.gov.br","responsavel":"Carlos Ferreira Rodrigues","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Cabreúva","cnpj":"47.935.646/0001-24","municipio":"Cabreúva","uf":"SP","endereco":"Rua Sete de Setembro, S/N - Jardim Paulista","cep":"13951-744","telefone":"+5535957732133","email":"secretaria@cabreuva.sp.gov.br","responsavel":"Fernanda Souza Pereira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Piracaia","cnpj":"02.503.926/0001-25","municipio":"Piracaia","uf":"SP","endereco":"Avenida Brasil, 985 - Jardim Paulista","cep":"12786-773","telefone":"44112284","email":"ouvidoria@piracaia.mg.gov.br","responsavel":"Juliana Souza Santos","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Morungaba","cnpj":"86.850.142/0001-63","municipio":"Morungaba","uf":"SP","endereco":"Rua Marechal Deodoro, 1088 - Vila Santa Cruz","cep":"12707-746","telefone":"+551940472894","email":"administracao@morungaba.sp.gov.br","responsavel":"Juliana Silva Nascimento","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Fundo Municipal de Assistência Social de Campinas","cnpj":"62.720.465/0001-74","municipio":"Campinas","uf":"SP","endereco":"Rua São João, S/N - Bairro Alto","cep":"12516-854","telefone":"+5519998371853","email":"contato@campinas.sp.gov.br","responsavel":"Luciana Silva Silva","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Educação de Itatiba","cnpj":"40.391.065/0001-20","municipio":"Itatiba","uf":"SP","endereco":"Avenida Brasil, S/N - Chácara Urbana","cep":"12837-184","telefone":"+553543227887","email":"secretaria@itatiba.sp.gov.br","responsavel":"Juliana Rodrigues Santos","cargo":"","qtd_registros_origem":"3","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Nazaré Paulista","cnpj":"90.277.038/0001-07","municipio":"Nazaré Paulista","uf":"SP","endereco":"Avenida Getúlio Vargas, S/N - Vila Santa Cruz","cep":"13380-036","telefone":"+551149983579","email":"protocolo@nazarepaulista.sp.gov.br","responsavel":"Juliana Rodrigues Ferreira","cargo":"Prefeito","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Camanducaia","cnpj":"94.417.154/0001-27","municipio":"Camanducaia","uf":"MG","endereco":"Avenida Presidente Kennedy, S/N - Vila Nova","cep":"13059-783","telefone":"+551146437620","email":"ouvidoria@camanducaia.sp.gov.br","responsavel":"Fernanda Pereira Rodrigues","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Autarquia de Água e Esgoto de Toledo","cnpj":"60.494.519/0001-03","municipio":"Toledo","uf":"MG","endereco":"Praça Nossa Senhora do Belém, S/N - Bairro Alto","cep":"12717-865","telefone":"+5519955644705","email":"secretaria@toledo.sp.gov.br","responsavel":"André Ferreira Ferreira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Câmara Municipal de Toledo","cnpj":"46.800.722/0001-21","municipio":"Toledo","uf":"MG","endereco":"Rua Marechal Deodoro, S/N - Jardim Paulista","cep":"12867-916","telefone":"+551934468646","email":"ouvidoria@toledo.sp.gov.br","responsavel":"Marcos Santos Silva","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Autarquia de Água e Esgoto de Cabreúva","cnpj":"90.967.054/0001-13","municipio":"Cabreúva","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Chácara Urbana","cep":"12558-446","telefone":"+551143697624","email":"contato@cabreuva.mg.gov.br","responsavel":"Juliana Ferreira Ferreira","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Fundo Municipal de Assistência Social de Jarinu","cnpj":"27.790.104/0001-01","municipio":"Jarinu","uf":"SP","endereco":"Rua São João, 2979 - Centro","cep":"12486-308","telefone":"+5511984892029","email":"secretaria@jarinu.sp.gov.br","responsavel":"Patrícia Ferreira Souza","cargo":"","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Educação de Morungaba","cnpj":"38.655.779/0001-56","municipio":"Morungaba","uf":"SP","endereco":"Rua XV de Novembro, S/N - Vila Nova","cep":"13053-658","telefone":"935786934","email":"ouvidoria@morungaba.sp.gov.br","responsavel":"Juliana Costa Martins","cargo":"Chefe de Gabinete","qtd_registros_origem":"2","fontes":"anexo_II_descritivo.pdf | anexo_I_relacao.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Itatiba","cnpj":"52.696.582/0001-96","municipio":"Itatiba","uf":"SP","endereco":"Rua Barão de Jundiaí, 299 - Centro","cep":"12441-040","telefone":"+551942879209","email":"secretaria@itatiba.sp.gov.br","responsavel":"Luciana Nascimento Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Bom Jesus dos Perdões","cnpj":"53.147.379/0001-23","municipio":"Bom Jesus dos Perdões","uf":"SP","endereco":"Rua Marechal Deodoro, 118 - Bairro Alto","cep":"12372-499","telefone":"36975581","email":"ouvidoria@bomjesusdosperdoes.mg.gov.br","responsavel":"Patrícia Souza Santos","cargo":"Presidente","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria Municipal de Educação de Camanducaia","cnpj":"58.202.970/0001-50","municipio":"Camanducaia","uf":"MG","endereco":"Praça da Matriz, S/N - Chácara Urbana","cep":"13239-157","telefone":"+551937618273","email":"gabinete@camanducaia.sp.gov.br","responsavel":"Juliana Costa Gomes","cargo":"Prefeita","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Extrema","cnpj":"90.010.943/0001-98","municipio":"Extrema","uf":"MG","endereco":"Rua Marechal Deodoro, 125 - Jardim Paulista","cep":"13314-979","telefone":"+5519976535873","email":"gabinete@extrema.sp.gov.br","responsavel":"Juliana Almeida Almeida","cargo":"Secretário","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Fundo Municipal de Assistência Social de Indaiatuba","cnpj":"00.369.155/0001-08","municipio":"Indaiatuba","uf":"SP","endereco":"Rua Marechal Deodoro, S/N - Vila Nova","cep":"12965-981","telefone":"+551940217945","email":"secretaria@indaiatuba.sp.gov.br","responsavel":"Andre Rodrigues Pereira","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria Municipal de Saúde de Bragança Paulista","cnpj":"19.182.553/0001-30","municipio":"Bragança Paulista","uf":"SP","endereco":"Rua Barão de Jundiaí, S/N - Vila Santa Cruz","cep":"13251-401","telefone":"47318501","email":"contato@bragancapaulista.sp.gov.br","responsavel":"Fernanda Ferreira Ferreira","cargo":"Secretário","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Campinas","cnpj":"69.379.237/0001-21","municipio":"Campinas","uf":"SP","endereco":"Avenida Presidente Kennedy, 1046 - Bairro Alto","cep":"13845-294","telefone":"982376661","email":"protocolo@campinas.sp.gov.br","responsavel":"Fernanda Almeida Pereira","cargo":"Presidente","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Prefeitura Municipal de Várzea Paulista","cnpj":"01.438.889/0001-56","municipio":"Várzea Paulista","uf":"SP","endereco":"Rua Coronel Rodrigues Alves, 1533 - Chácara Urbana","cep":"12706-025","telefone":"+551148852406","email":"ouvidoria@varzeapaulista.sp.gov.br","responsavel":"Ricardo Souza Nascimento","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Fundo Municipal de Assistência Social de Atibaia","cnpj":"41.714.677/0001-79","municipio":"Atibaia","uf":"SP","endereco":"Avenida Presidente Kennedy, 2229 - Vila Nova","cep":"13813-390","telefone":"+551135398204","email":"protocolo@atibaia.sp.gov.br","responsavel":"Maria Oliveira Martins","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Prefeitura Municipal de Jundiaí","cnpj":"97.882.081/0001-32","municipio":"Jundiaí","uf":"SP","endereco":"Praça da Matriz, S/N - Chácara Urbana","cep":"13928-911","telefone":"+551130812343","email":"ouvidoria@jundiai.sp.gov.br","responsavel":"Fernanda Souza Gomes","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Secretaria de Obras e Serviços de Jarinu","cnpj":"37.770.143/0001-92","municipio":"Jarinu","uf":"SP","endereco":"Avenida Dom Pedro I, S/N - Chácara Urbana","cep":"12871-763","telefone":"+551939295438","email":"protocolo@jarinu.sp.gov.br","responsavel":"Paulo Santos Martins","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"},{"nome_orgao":"Fundo Municipal de Assistência Social de Amparo","cnpj":"61.200.471/0001-38","municipio":"Amparo","uf":"SP","endereco":"Avenida Brasil, 556 - Chácara Urbana","cep":"13373-972","telefone":"+553538583531","email":"ouvidoria@amparo.sp.gov.br","responsavel":"Juliana Pereira Silva","cargo":"","qtd_registros_origem":"1","fontes":"anexo_II_descritivo.pdf"}]};
+const $ = s => document.querySelector(s);
+const fmt = n => n.toLocaleString('pt-BR');
+
+document.getElementById('data').textContent = D.gerado;
+
+/* ---- hero: uma marca por linha bruta, as redundantes apagam ---- */
+(function(){
+  const alvo = $('#marcas');
+  const dups = D.bruto - D.final;
+  const frag = document.createDocumentFragment();
+  const idx = [...Array(D.bruto).keys()];
+  // distribui as redundantes ao longo do bloco em vez de agrupar no fim
+  const marcadas = new Set();
+  for(let i=0;i<dups;i++) marcadas.add(Math.floor(i*D.bruto/dups));
+  idx.forEach(i=>{
+    const d = document.createElement('i');
+    d.className = 'm' + (marcadas.has(i) ? ' dup' : '');
+    d.style.animationDelay = (i*3.2)+'ms';
+    frag.appendChild(d);
+  });
+  alvo.appendChild(frag);
+  $('#tese-num').textContent = fmt(D.bruto) + ' recebidas → ' + fmt(D.final) + ' entidades';
+
+  const reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const apagar = () => alvo.querySelectorAll('.m.dup')
+      .forEach((el,k)=>{ el.style.animationDelay=(k*3.6)+'ms'; el.classList.add('some'); });
+  if(reduz){ alvo.querySelectorAll('.m.dup').forEach(el=>el.style.opacity='.14'); }
+  else{ setTimeout(apagar, D.bruto*3.2 + 500); }
+})();
+
+/* ---- faixa de numeros ---- */
+$('#numeros').innerHTML = [
+  ['Linhas recebidas', fmt(D.bruto), ''],
+  ['Entidades no resultado', fmt(D.final), ''],
+  ['Redundância eliminada', D.reducao+'%', 'destaque'],
+  ['Arquivos de origem', Object.keys(D.fontes).length, ''],
+  ['Municípios', Object.keys(D.municipios).length, ''],
+].map(([l,v,c])=>
+  `<div class="num ${c}"><span class="v">${v}</span><span class="l">${l}</span></div>`
+).join('');
+
+/* ---- barras simples ---- */
+function barras(alvo, dados, cor){
+  const max = Math.max(...Object.values(dados));
+  $(alvo).innerHTML = Object.entries(dados).map(([k,v])=>`
+    <div class="barra">
+      <div class="barra-topo"><span>${k}</span><span class="n">${fmt(v)}</span></div>
+      <div class="trilho"><div class="preench ${cor||''}" style="width:${v/max*100}%"></div></div>
+    </div>`).join('');
+}
+barras('#fontes', D.fontes, 'azul');
+barras('#municipios', D.municipios);
+barras('#tipos', D.tipos);
+
+const clu = {};
+Object.entries(D.clusters).forEach(([k,v])=>{
+  clu[k+(k==='1'?' fonte':' fontes')] = v;
+});
+barras('#clusters', clu);
+
+/* ---- preenchimento antes/depois ---- */
+$('#preenchimento').innerHTML = D.preenchimento.map(p=>`
+  <div class="barra">
+    <div class="barra-topo">
+      <span>${p.campo}</span>
+      <span class="n">${p.antes}% → ${p.depois}%</span>
+    </div>
+    <div class="dupla">
+      <div class="linha-dupla"><span class="tag">antes</span>
+        <div class="trilho"><div class="preench" style="width:${p.antes}%"></div></div></div>
+      <div class="linha-dupla"><span class="tag">depois</span>
+        <div class="trilho"><div class="preench azul" style="width:${p.depois}%"></div></div></div>
+    </div>
+  </div>`).join('');
+
+/* ---- ressalvas ---- */
+$('#r-total').textContent = D.sem_ddd;
+$('#r-orfao').textContent = D.sem_ddd_orfao;
+$('#r-todos').textContent = D.sem_ddd_todos;
+
+/* ---- tabela ---- */
+const sel = $('#mun');
+sel.innerHTML = '<option value="">Todos os municípios</option>' +
+  Object.keys(D.municipios).sort((a,b)=>a.localeCompare(b,'pt-BR'))
+    .map(m=>`<option>${m}</option>`).join('');
+
+const cel = v => v ? v : '<span class="vazio">—</span>';
+
+function desenhar(){
+  const q = $('#q').value.trim().toLowerCase();
+  const m = sel.value;
+  const filtrados = D.registros.filter(r=>{
+    if(m && r.municipio !== m) return false;
+    if(!q) return true;
+    return [r.nome_orgao,r.cnpj,r.email,r.responsavel,r.municipio]
+      .join(' ').toLowerCase().includes(q);
+  });
+  $('#corpo').innerHTML = filtrados.map(r=>{
+    const n = parseInt(r.qtd_registros_origem,10);
+    const selo = n>1 ? `<span class="fusao" title="${n} registros de origem">${n}×</span>` : '';
+    return `<tr>
+      <td class="orgao">${r.nome_orgao}${selo}</td>
+      <td>${cel(r.cnpj)}</td><td>${r.municipio}</td><td>${r.uf}</td>
+      <td>${cel(r.endereco)}</td><td>${cel(r.cep)}</td>
+      <td>${cel(r.telefone)}</td><td>${cel(r.email)}</td>
+      <td>${cel(r.responsavel)}</td>
+    </tr>`;
+  }).join('');
+  $('#contador').textContent = filtrados.length === D.registros.length
+    ? `${fmt(D.registros.length)} entidades`
+    : `${fmt(filtrados.length)} de ${fmt(D.registros.length)} entidades`;
+}
+$('#q').addEventListener('input', desenhar);
+sel.addEventListener('change', desenhar);
+desenhar();
+</script>
+</body>
+</html>
